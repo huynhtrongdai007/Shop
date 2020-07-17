@@ -17,6 +17,8 @@ include_once ($filepath.'/../helpers/format.php');
  		$this->fm = new Format();
  	}
 
+ 	
+
  	public function insertBrand($brandName)
  	{
  		$brandName = $this->fm->validation($brandName);
@@ -27,28 +29,37 @@ include_once ($filepath.'/../helpers/format.php');
  			$alert="<span class='error'>name brand be not empty</span>";
  			return $alert;
  		} 
- 		elseif(strlen($brandName) > 5)
+ 		elseif(strlen($brandName) > 10)
  		{
-		$alert="<span class='error'>name brand khong vuot qua 5 ky tu</span>";
+		$alert="<span class='error'>name brand khong vuot qua 10 ky tu</span>";
  			return $alert;
  		}
 
  		else
  		{
- 			$query = "INSERT INTO tbl_brand(brand_name) VALUES('$brandName')";
- 			$result = $this->db->insert($query);
-
- 			if($result)
+ 			if($this->checkName($brandName))
  			{
-
-	 			$alert="<span class='success'>Insert brand name successfully</span>";
+	 			$alert="<span class='error'>Name brand was has please choose other name</span>";
 	 			return $alert;
  			}
  			else
  			{
- 				$alert="<span class='error'>Insert brand name not success</span>";
-	 			return $alert;
+ 				$query = "INSERT INTO tbl_brand(brand_name) VALUES('$brandName')";
+ 				$result = $this->db->insert($query);
+
+	 			if($result)
+	 			{
+
+		 			$alert="<span class='success'>Insert brand name successfully</span>";
+		 			return $alert;
+	 			}
+	 			else
+	 			{
+	 				$alert="<span class='error'>Insert brand name not success</span>";
+		 			return $alert;
+	 			}
  			}
+ 			
  		}
 
  	}
@@ -63,12 +74,11 @@ include_once ($filepath.'/../helpers/format.php');
  			$alert="<span class='error'>name brand be not empty</span>";
  			return $alert;
  		}
- 		elseif(strlen($brandName) > 5)
+ 		elseif(strlen($brandName) > 10)
  		{
 			$alert="<span class='error'>name brand khong vuot qua 5 ky tu</span>";
  			return $alert;
  		}
-
  		else
  		{
  			$query = "UPDATE tbl_brand SET brand_name = '$brandName' WHERE brand_id = '$id'";
@@ -109,7 +119,14 @@ include_once ($filepath.'/../helpers/format.php');
  		$result = $this->db->delete($query);
  		return $result;
  	}
-
+	// kiem tra ten co trong db chua
+ 	public function checkName($name)
+ 	{
+ 		$query = "SELECT brand_name FROM tbl_brand WHERE brand_name = '$name'";
+ 		$result = $this->db->select($query);
+ 		return $result;
+ 	}
+ 
  } 
 
 

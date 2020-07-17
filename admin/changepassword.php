@@ -1,17 +1,19 @@
 ﻿<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
+
 <div class="grid_10">
     <div class="box round first grid">
         <h2>Change Password</h2>
         <div class="block">               
-         <form>
+         <form action="changepassword.php" method="POST">
+      
             <table class="form">					
                 <tr>
                     <td>
                         <label>Old Password</label>
                     </td>
                     <td>
-                        <input type="password" placeholder="Enter Old Password..."  name="title" class="medium" />
+                        <input type="password" placeholder="Enter Old Password..."  name="oldpass" class="medium" />
                     </td>
                 </tr>
 				 <tr>
@@ -19,7 +21,7 @@
                         <label>New Password</label>
                     </td>
                     <td>
-                        <input type="password" placeholder="Enter New Password..." name="slogan" class="medium" />
+                        <input type="password" placeholder="Enter New Password..." name="newpass" class="medium" />
                     </td>
                 </tr>
 				 
