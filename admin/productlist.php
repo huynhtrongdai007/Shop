@@ -14,6 +14,7 @@ $fm = new Format();
             <table class="data display datatable" id="example">
 			<thead>
 				<tr>
+					<th>ID</th>
 					<th>Post Title</th>
 					<th>Description</th>
 					<th>Category</th>
@@ -25,6 +26,7 @@ $fm = new Format();
 			<tbody>
 				<?php foreach ($data_pro as $items): ?>
 				<tr class="odd gradeX">
+					<td><?php echo $items['product_id']; ?></td>
 					<td><?php echo $items['product_name'];?></td>
 					<td><?php echo $fm->textShorten($items['description'],30);?></td>
 					<td><?php echo $items['name']; ?></td>

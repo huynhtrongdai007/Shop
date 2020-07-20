@@ -94,4 +94,12 @@ class Category
 		return $result;
 	}
 
+	// view
+
+	public function fetchProductByCat($id)
+	{
+		$query = "SELECT *  FROM tbl_product WHERE category_id = '$id' ORDER BY category_id DESC";
+		$result = $this->db->delete($query);
+		return $result;
+	}
 }

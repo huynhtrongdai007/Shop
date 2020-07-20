@@ -40,7 +40,7 @@
                              $data_cat = $cat->fetchAll();
                              ?>
                            <?php foreach ($data_cat as $items): ?>
-                            <option value="<?php echo $items['id']; ?>"><?php echo $items['name']; ?></option>
+                            <option value="<?php echo $items['category_id']; ?>"><?php echo $items['name']; ?></option>
                             <?php endforeach; ?>
                         </select>   
                     </td>
@@ -54,7 +54,7 @@
                             <option value="0">Select Brand</option>
                             <?php 
                                 $brand = new Brand();
-                                $data_brand = $brand->fetchAllBrand();
+                                $data_brand = $brand->fetchAll();
                              ?>
                              <?php foreach ($data_brand as $items2):?>
                             <option value="<?php echo $items2['brand_id']; ?>"><?php echo $items2['brand_name']; ?></option>

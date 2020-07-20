@@ -13,6 +13,7 @@ spl_autoload_register(function($ClsName){
 	$cat = new Category();
 	$pr = new Product();
 	$br = new Brand();
+	$cus = new Customer();
  ?>
 <?php
   header("Cache-Control: no-cache, must-revalidate");

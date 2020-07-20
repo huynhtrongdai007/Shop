@@ -48,12 +48,13 @@ class Product
 			if(!empty($file_name))
 			{
 				// nếu người dùng chọn ảnh
-				if($file_size > 2048)
-				{	
-					$alert = "<span class='error'>Image Size should be less then 2MB</span>";
-					return $alert;
-				}
-				elseif(in_array($file_ext, $premited)===false)
+				// if($file_size > 2048)
+				// {	
+				// 	$alert = "<span class='error'>Image Size should be less then 2MB</span>";
+				// 	return $alert;
+				// }
+				// else
+				if(in_array($file_ext, $premited)===false)
 				{
 					echo"<span class='error'>You can upload only:".implode(',', $premited)."</span>";
 				}

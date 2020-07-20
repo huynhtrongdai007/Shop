@@ -60,7 +60,7 @@ $item = $dataPro->fetch_assoc();
 					<ul>
 						<?php $categoryName= $cat->fetchAll(); ?>
 						<?php foreach ($categoryName as $items): ?>
-				          <li><a href="productbycat.html"><?php echo $items['name']; ?></a></li>
+				          <li><a href="productbycat.php?id=<?php echo $items['category_id']; ?>"><?php echo $items['name']; ?></a></li>
 				        <?php endforeach; ?>
 				      
     				</ul>
