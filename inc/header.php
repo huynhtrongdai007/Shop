@@ -62,7 +62,7 @@ spl_autoload_register(function($ClsName){
 								<span class="no_product">
 									<?php 
 									$checkCart = $ct->checkCart();
-									if($checkCart){
+									if($checkCart==true){
 										$sum = Session::get("sum");
 										echo number_format($sum);
 									} else{
@@ -75,7 +75,16 @@ spl_autoload_register(function($ClsName){
 							</a>
 						</div>
 			      </div>
-		   <div class="login"><a href="login.php">Login</a></div>
+		   <div class="login">
+		   	<?php $loginCheck = Session::get('customer_login');
+			   		if($loginCheck==false){
+			   			echo "<a href='login.php'>Login</a>";
+			   		} else {
+		   			echo '<a href="logout.php?customer_id='.Session::get('customer_id').'">Logout</a>';
+		   		}
+		   	 ?>
+		   
+		   </div>
 		 <div class="clear"></div>
 	 </div>
 	 <div class="clear"></div>
@@ -85,7 +94,28 @@ spl_autoload_register(function($ClsName){
 	  <li><a href="index.php">Home</a></li>
 	  <li><a href="products.php">Products</a> </li>
 	  <li><a href="topbrands.php">Top Brands</a></li>
-	  <li><a href="cart.php">Cart</a></li>
+	  <?php 
+	  $loginCheck = Session::get('customer_login');
+	  	if($loginCheck==false)
+	  	{
+	  		echo "";
+	  	}
+	  	else
+	  	{
+	  		echo '<li><a href="profile.php">Profile</a></li>';
+	  	}
+	   ?>
+	  <?php 
+	  	$checkCart = $ct->checkCart();
+	  	if ($checkCart==true) {
+	  		echo '<li><a href="cart.php">Cart</a></li>';
+	  	}
+	  	else
+	  	{
+	  		echo "";
+	  	}
+	   ?>
+	  
 	  <li><a href="contact.php">Contact</a> </li>
 	  <div class="clear"></div>
 	</ul>

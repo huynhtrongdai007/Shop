@@ -1,7 +1,11 @@
+<?php include_once 'lib/session.php'; ?>
+	
 <?php include 'inc/header.php'; ?>
 
 <?php 
 
+
+    
     if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit']))
     {
         $insertCustomer = $cus->insertCustomer($_POST);
@@ -86,4 +90,5 @@
     </div>
  </div>
 </div>
+
 <?php include 'inc/footer.php'; ?>
