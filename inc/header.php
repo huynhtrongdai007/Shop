@@ -14,6 +14,7 @@ spl_autoload_register(function($ClsName){
 	$pr = new Product();
 	$br = new Brand();
 	$cus = new Customer();
+	$od = new Order();
  ?>
 <?php
   header("Cache-Control: no-cache, must-revalidate");
@@ -103,6 +104,18 @@ spl_autoload_register(function($ClsName){
 	  	else
 	  	{
 	  		echo '<li><a href="profile.php">Profile</a></li>';
+	  	}
+	   ?>
+	 <?php 
+	  $customer_id = Session::get('customer_id');
+	  $checkOrder = $od->checkOrder($customer_id);
+	  	if($checkOrder==false)
+	  	{
+	  		echo "";
+	  	}
+	  	else
+	  	{
+	  		echo '<li><a href="orderdetail.php">Ordered</a></li>';
 	  	}
 	   ?>
 	  <?php 

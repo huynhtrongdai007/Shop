@@ -106,4 +106,6 @@ class Cart
 		$result = $this->db->delete($query);
 		return $result;
 	}
+
+	
 }

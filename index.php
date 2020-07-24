@@ -40,4 +40,5 @@
 			</div>
     </div>
  </div>
+ <?php  echo $date = date("F j, Y, g:i a"); ?>
 <?php include 'inc/footer.php'; ?>

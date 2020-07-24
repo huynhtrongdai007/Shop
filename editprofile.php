@@ -8,7 +8,7 @@
  }
  ?>
  <?php 
- $id = session_id();
+ $id =  Session::get('customer_id');
  	if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['save'])) {
  		$updatecustomer = $cus->updateCustomer($_POST,$id);
  	}
