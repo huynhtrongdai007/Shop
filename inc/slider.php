@@ -1,3 +1,4 @@
+
 <div class="header_bottom">
 		<div class="header_bottom_left">
 			<div class="section group">
@@ -52,10 +53,14 @@
 			<section class="slider">
 				  <div class="flexslider">
 					<ul class="slides">
-						<li><img src="images/1.jpg" alt=""/></li>
-						<li><img src="images/2.jpg" alt=""/></li>
-						<li><img src="images/3.jpg" alt=""/></li>
-						<li><img src="images/4.jpg" alt=""/></li>
+						<?php
+
+						$get_slier = $sl->getAllSlider(); ?>
+						<?php foreach ($get_slier as $items): ?>
+						<li><img src="./admin/sliders/<?php echo $items['image'] ?>" alt=""/></li>
+						<li><img src="./admin/sliders/<?php echo $items['image'] ?>" alt=""/></li>
+					<?php endforeach; ?>
+						
 				    </ul>
 				  </div>
 	      </section>

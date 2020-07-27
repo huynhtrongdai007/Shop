@@ -2527,3 +2527,7 @@ a.preview {
 	margin-top: 5px;
 }
 
+.product-desc form{
+	float: left;
+	margin: 0px 5px;
+}

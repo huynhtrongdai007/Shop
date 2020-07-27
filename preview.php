@@ -1,23 +1,33 @@
 <?php include 'inc/header.php'; ?>
 
 <?php 
+	if (!isset($_GET['id']) || $_GET['id']==NULL) {
+		echo "<script>window.location = '404.php'</script>";
+	} else {
+		$id = $_GET['id'];
+	}
+		$dataPro = $pr->getDetails($id);
+		$item = $dataPro->fetch_assoc();
 
-    if(!isset($_GET['id']) || $_GET['id']==NULL)
+ 		$customer_id = Session::get('customer_id');
+    if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['compare']))	
     {
-        echo "<script>window.location = '404.php'</script>";
-
-    }else {
-    	$id = $_GET['id'];
+    	$productid = $_POST['productid'];
+        $insertCompare = $pr->insertCompare($productid,$customer_id);
     }
 
-    if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit']))
+    if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['wishlist']))
     {
-    	$quantity = $_POST['quantity'];
-        $addCart = $ct->addToCart($quantity,$id);
+    	$productid = $_POST['productid'];
+        $insertwishlist = $pr->insertWishlist($productid,$customer_id);
     }
 
-$dataPro = $pr->getDetails($id);
-$item = $dataPro->fetch_assoc();
+
+ if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit']))
+    {
+    	$quantity = $_POST['quantity'];	
+        $insertCart = $ct->addToCart($quantity,$id);
+    }
  ?>
  <div class="main">
     <div class="content">
@@ -41,12 +51,40 @@ $item = $dataPro->fetch_assoc();
 
 					</form>	
 					<?php 
-					if(isset($addCart))
+					if(isset($insertCart))
 						{
 							echo "<span style='color: red;font-size: 18px;'>Product Already Added</span>";
 						} 
 					?>	
 								
+				</div>
+				<div class="product-desc">
+					<form action="" method="POST">
+						<?php if(Session::get('customer_id')){?>
+							<input type="hidden" name="productid" value="<?php echo $item['product_id']; ?>">
+ 					    	<input type="submit" class="buysubmit" name="compare" value="Compare Product">
+ 						<?php }else{echo"";} ?>
+						
+					</form>
+ 					<form action="" method="POST">
+						<?php if(Session::get('customer_id')){?>
+							<input type="hidden" name="productid" value="<?php echo $item['product_id']; ?>">
+ 						  <input type="submit" class="buysubmit" name="wishlist" value="Save Wishlist Product">
+ 						<?php }else{echo"";} ?>
+						
+					</form>
+					<div style="clear: both;"></div>
+ 					 <p>
+ 						<?php 
+ 						if (isset($insertwishlist)) {
+ 							echo $insertwishlist;
+ 						}
+
+ 						if (isset($insertCompare)) {
+ 							echo $insertCompare;
+ 						}
+ 					 ?>
+ 					</p>
 				</div>
 			</div>
 			<div class="product-desc" >

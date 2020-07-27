@@ -1,5 +1,6 @@
 <?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
+<?php include '../classes/Slider.php'; ?>
 <div class="grid_10">
     <div class="box round first grid">
         <h2>Slider List</h2>
@@ -14,16 +15,20 @@
 				</tr>
 			</thead>
 			<tbody>
-
+			<?php
+			$sl = new Slider();
+			 $data = $sl->getAllSlider(); ?>
+			<?php foreach ($data as $items):?>
 				<tr class="odd gradeX">
-					<td>01</td>
-					<td>Title of Slider</td>
-					<td><img src="" height="40px" width="60px"/></td>				
-				<td>
-					<a href="">Edit</a> || 
-					<a onclick="return confirm('Are you sure to Delete!');" >Delete</a> 
-				</td>
-					</tr>	
+					<td><?php echo $items['slider_id'] ?></td>
+					<td><?php echo $items['title'] ?></td>
+					<td><img src="./sliders/<?php echo $items['image']; ?>" height="80px"/></td>				
+					<td>
+						<a href="">Edit</a> || 
+						<a onclick="return confirm('Are you sure to Delete!');" >Delete</a> 
+					</td>
+				</tr>	
+			<?php endforeach; ?>
 			</tbody>
 		</table>
 

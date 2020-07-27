@@ -198,4 +198,97 @@ class Product
 		return $result;
 	}
 
+	public function insertCompare($product_id,$customer_id)
+	{
+		$product_id = mysqli_real_escape_string($this->db->link,$product_id);
+		$customer_id = mysqli_real_escape_string($this->db->link,$customer_id);
+		$checkCompare = "SELECT * FROM tbl_compare WHERE product_id = '$product_id' AND customer_id ='$customer_id'";
+		$resultCheck = $this->db->select($checkCompare);
+		if($resultCheck)
+		{
+			$smg = "<span class='error'>Product Already Added to Compare</span>";
+			return $smg;
+		} else {
+
+				$query = "SELECT * FROM tbl_product WHERE product_id = $product_id";
+				$result = $this->db->select($query)->fetch_assoc();
+				$productName = $result['product_name']; 
+				$price = $result['price'];
+				$image = $result['image'];
+
+				$query_insert = "INSERT INTO tbl_compare(product_name,product_id,customer_id,price,image) 
+								VALUES('$productName','$product_id','$customer_id','$price','$image')";
+				$query_insert_compare = $this->db->insert($query_insert);
+				if ($query_insert_compare) {
+						$alert="<span class='success'>Added Compare SuccessFully</span>";
+						return $alert;		
+				} else {
+						$alert="<span class='error'>Add Compare Not Success</span>";
+						return $alert;
+				}
+			}	
+
+	}
+
+	public function getAllCompareById($customer_id)
+	{
+		$query = "SELECT * FROM tbl_compare WHERE customer_id = '$customer_id' ORDER BY id DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+	public function deleteCompare($id)
+	{
+		$query = "DELETE FROM tbl_compare WHERE id = '$id'";
+		$result = $this->db->delete($query);
+		return $result;
+	}
+
+
+	public function insertWishlist($product_id,$customer_id)
+	{
+		$product_id = mysqli_real_escape_string($this->db->link,$product_id);
+		$customer_id = mysqli_real_escape_string($this->db->link,$customer_id);
+
+		$checkWlist = "SELECT * FROM tbl_wishlist WHERE product_id = '$product_id' AND customer_id ='$customer_id'";
+		
+		$resultCheck = $this->db->select($checkWlist);
+		if($resultCheck)
+		{
+			$smg = "<span class='error'>Product Already Added to wishlist</span>";
+			return $smg;
+		} else {
+
+				$query = "SELECT * FROM tbl_product WHERE product_id = $product_id";
+				$result = $this->db->select($query)->fetch_assoc();
+				$productName = $result['product_name']; 
+				$price = $result['price'];
+				$image = $result['image'];
+
+				$query_insert = "INSERT INTO tbl_wishlist(product_name,product_id,customer_id,price,image) 
+								VALUES('$productName','$product_id','$customer_id','$price','$image')";
+				$query_insert_wlist = $this->db->insert($query_insert);
+				if ($query_insert_wlist) {
+						$alert="<span class='success'>Added to wishlist SuccessFully</span>";
+						return $alert;		
+				} else {
+						$alert="<span class='error'>Add to wishlist Not Success</span>";
+						return $alert;
+				}
+			}	
+
+	}
+
+	public function getAllWishListById($customer_id)
+	{
+		$query = "SELECT * FROM tbl_wishlist WHERE customer_id = '$customer_id' ORDER BY id DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+	public function deleteWishlish($id) {
+		$query = "DELETE FROM tbl_wishlist WHERE id = '$id'";
+		$result = $this->db->delete($query);
+		return $result;
+	}
 }

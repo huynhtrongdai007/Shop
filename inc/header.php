@@ -15,6 +15,7 @@ spl_autoload_register(function($ClsName){
 	$br = new Brand();
 	$cus = new Customer();
 	$od = new Order();
+	$sl = new Slider();
  ?>
 <?php
   header("Cache-Control: no-cache, must-revalidate");
@@ -96,7 +97,7 @@ spl_autoload_register(function($ClsName){
 	  <li><a href="products.php">Products</a> </li>
 	  <li><a href="topbrands.php">Top Brands</a></li>
 	  <?php 
-	  $loginCheck = Session::get('customer_login');
+		  $loginCheck = Session::get('customer_login');
 	  	if($loginCheck==false)
 	  	{
 	  		echo "";
@@ -128,7 +129,27 @@ spl_autoload_register(function($ClsName){
 	  		echo "";
 	  	}
 	   ?>
-	  
+
+	    <?php 
+	  	  $compareCheck = Session::get('customer_id');
+	  	if ($compareCheck==true) {
+	  		echo '<li><a href="compare.php">Compare</a></li>';	
+	  	}
+	  	else
+	  	{
+	  		echo "";
+	  	}
+	   ?>
+	    <?php 
+	  	  $compareCheck = Session::get('customer_id');
+	  	if ($compareCheck==true) {
+	  		echo '<li><a href="wishlist.php">Wish List</a></li>';	
+	  	}
+	  	else
+	  	{
+	  		echo "";
+	  	}
+	   ?>
 	  <li><a href="contact.php">Contact</a> </li>
 	  <div class="clear"></div>
 	</ul>
