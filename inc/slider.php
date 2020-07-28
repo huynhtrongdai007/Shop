@@ -55,9 +55,8 @@
 					<ul class="slides">
 						<?php
 
-						$get_slier = $sl->getAllSlider(); ?>
+						$get_slier = $sl->getByStatus(); ?>
 						<?php foreach ($get_slier as $items): ?>
-						<li><img src="./admin/sliders/<?php echo $items['image'] ?>" alt=""/></li>
 						<li><img src="./admin/sliders/<?php echo $items['image'] ?>" alt=""/></li>
 					<?php endforeach; ?>
 						

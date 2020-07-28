@@ -291,4 +291,13 @@ class Product
 		$result = $this->db->delete($query);
 		return $result;
 	}
+
+	public function searchProduct($keywords)
+	{
+		$keywords = mysqli_real_escape_string($this->db->link,$keywords);
+		$keywords = $this->fm->validation($keywords);
+		$query = "SELECT * FROM tbl_product WHERE product_name LIKE '%$keywords%'";
+		$result = $this->db->select($query);
+		return $result;
+	}
 }
