@@ -1,8 +1,11 @@
 <?php include 'inc/header.php'; ?>
 <?php 
-	if ($_SERVER['REQUEST_METHOD']=='POST') {
-		$keywords = $_POST['search'];
+	if ($_SERVER['REQUEST_METHOD']=='GET') {
+		$keywords = $_GET['search'];
 		$result_search = $pr->searchProduct($keywords);
+	}  
+	if($_GET['search']==NULL){
+		header("location:index.php");
 	}
 
 	

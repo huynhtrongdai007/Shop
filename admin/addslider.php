@@ -6,9 +6,9 @@
     if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit']))
     {
         $insertcategory = $sl->insertSlider($_POST,$_FILES);
-    }
+    }   
 
-   
+
  ?>
 
 <div class="grid_10">

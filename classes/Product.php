@@ -173,10 +173,12 @@ class Product
 	}
 // -------------------------------Front-end----------------------------------------
 
-	public function getProductFeathered()
+	public function getProductFeathered($trang)
 	{
-		$query = "SELECT * FROM tbl_product WHERE type = 1";
+		$from = ($trang - 1) * 4;
+		$query = "SELECT * FROM tbl_product LIMIT $from,4";
 		$result = $this->db->select($query);
+		
 		return $result;
 	}
 
@@ -298,6 +300,25 @@ class Product
 		$keywords = $this->fm->validation($keywords);
 		$query = "SELECT * FROM tbl_product WHERE product_name LIKE '%$keywords%'";
 		$result = $this->db->select($query);
-		return $result;
+		if(empty($result)){
+			$alert="khong co ket qua tim kiem";
+			return $alert;
+		}else {
+			return $result;
+		}
 	}
+
+	public function countPage()
+	{
+
+		$query = "SELECT product_id FROM tbl_product";
+		$result = $this->db->select($query);
+		$cout = mysqli_num_rows($result);
+		$sotrang = ceil($cout/ 4);
+		return $sotrang;
+	}
+
+
+
+
 }

@@ -17,6 +17,11 @@ spl_autoload_register(function($ClsName){
 	$od = new Order();
 	$sl = new Slider();
  ?>
+ <?php 
+ 	if (!isset($_POST['btn_search'])) {
+ 		echo "<script>xin vio nhap tu khoa tim Kiếm</script>";
+ 	}
+  ?>
 <?php
   header("Cache-Control: no-cache, must-revalidate");
   header("Pragma: no-cache"); 
@@ -53,9 +58,10 @@ spl_autoload_register(function($ClsName){
 			</div>
 			  <div class="header_top_right">
 			    <div class="search_box">
-				    <form action="search.php" method="POST">
-				    	<input type="text" placeholder="Tìm Kiếm..." name="search">
-				    	<input type="submit" name="btn_search" value="SEARCH">
+	
+				    <form action="search.php" method="GET">
+				    	<input type="text" id="search"  placeholder="Tìm Kiếm..." name="search">
+				    	<input type="submit" id="btn_search" onclick="return btnSearch();" value="SEARCH">
 				    </form>
 			    </div>
 			    <div class="shopping_cart">
