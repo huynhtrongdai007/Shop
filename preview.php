@@ -37,12 +37,12 @@
 						<img src="./admin/uploads/<?php echo $item['image'];?>" alt="image" />
 					</div>
 				<div class="desc span_3_of_2">
-					<h2><?php echo $item['product_name'];?></h2>
-					<p><?php echo $fm->textShorten($item['description'],150); ?></p>					
+					<h2><?php echo $item['productName'];?></h2>
+					<p><?php echo $fm->textShorten($item['product_desc'],150); ?></p>					
 					<div class="price">
 						<p>Price: <span><?php echo number_format($item['price'])." "."VNĐ";?></span></p>
-						<p>Category: <span><?php echo $item['name']; ?></span></p>
-						<p>Brand:<span><?php echo $item['brand_name']; ?></span></p>
+						<p>Category: <span><?php echo $item['productName']; ?></span></p>
+						<p>Brand:<span><?php echo $item['brandName']; ?></span></p>
 					</div>
 				<div class="add-cart">
 					<form action="" method="post">
@@ -61,14 +61,14 @@
 				<div class="product-desc">
 					<form action="" method="POST">
 						<?php if(Session::get('customer_id')){?>
-							<input type="hidden" name="productid" value="<?php echo $item['product_id']; ?>">
+							<input type="hidden" name="productid" value="<?php echo $item['productId']; ?>">
  					    	<input type="submit" class="buysubmit" name="compare" value="Compare Product">
  						<?php }else{echo"";} ?>
 						
 					</form>
  					<form action="" method="POST">
 						<?php if(Session::get('customer_id')){?>
-							<input type="hidden" name="productid" value="<?php echo $item['product_id']; ?>">
+							<input type="hidden" name="productid" value="<?php echo $item['productId']; ?>">
  						  <input type="submit" class="buysubmit" name="wishlist" value="Save Wishlist Product">
  						<?php }else{echo"";} ?>
 						
@@ -89,7 +89,7 @@
 			</div>
 			<div class="product-desc" >
 			<h2>Product Details</h2>
-			<p><?php echo  $item['description']; ?></p>
+			<p><?php echo  $item['product_desc']; ?></p>
 	    </div>
 				
 	</div>
@@ -98,7 +98,7 @@
 					<ul>
 						<?php $categoryName= $cat->fetchAll(); ?>
 						<?php foreach ($categoryName as $items): ?>
-				          <li><a href="productbycat.php?id=<?php echo $items['category_id']; ?>"><?php echo $items['name']; ?></a></li>
+				          <li><a href="productbycat.php?id=<?php echo $items['cateId']; ?>"><?php echo $items['catName']; ?></a></li>
 				        <?php endforeach; ?>
 				      
     				</ul>

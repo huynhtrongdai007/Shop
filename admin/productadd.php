@@ -27,6 +27,23 @@
                     <td>
                         <input type="text" name="name" placeholder="Enter Product Name..." class="medium" />
                     </td>
+                   
+                </tr>
+                <tr>
+                     <td>
+                        <label>Code</label>
+                    </td>
+                    <td>
+                        <input type="text" name="product_code" placeholder="Enter Product Code..." class="medium">
+                    </td>
+                </tr>
+                 <tr>
+                     <td>
+                        <label>Quantity</label>
+                    </td>
+                    <td>
+                        <input type="text" name="productQuantity" placeholder="Enter Quantity Product..." class="medium">
+                    </td>
                 </tr>
 				<tr>
                     <td>
@@ -40,7 +57,7 @@
                              $data_cat = $cat->fetchAll();
                              ?>
                            <?php foreach ($data_cat as $items): ?>
-                            <option value="<?php echo $items['category_id']; ?>"><?php echo $items['name']; ?></option>
+                            <option value="<?php echo $items['catId']; ?>"><?php echo $items['catName']; ?></option>
                             <?php endforeach; ?>
                         </select>   
                     </td>
@@ -57,7 +74,7 @@
                                 $data_brand = $brand->fetchAll();
                              ?>
                              <?php foreach ($data_brand as $items2):?>
-                            <option value="<?php echo $items2['brand_id']; ?>"><?php echo $items2['brand_name']; ?></option>
+                            <option value="<?php echo $items2['brandId']; ?>"><?php echo $items2['brandName']; ?></option>
                           
                             <?php endforeach; ?>
                         </select>

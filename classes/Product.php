@@ -21,11 +21,14 @@ class Product
 	public function insertProduct($data,$files)
 	{
 		$productName = mysqli_real_escape_string($this->db->link,$data['name']);
+		$Productcode = mysqli_real_escape_string($this->db->link,$data['product_code']); 
+		$Quantity = mysqli_real_escape_string($this->db->link,$data['productQuantity']); 
 		$brand = mysqli_real_escape_string($this->db->link,$data['brand']);
 		$category = mysqli_real_escape_string($this->db->link,$data['category']);
 		$desc = mysqli_real_escape_string($this->db->link,$data['desc']);
 		$price = mysqli_real_escape_string($this->db->link,$data['price']);
 		$type = mysqli_real_escape_string($this->db->link,$data['type']);
+		
 
 		// kiểm tra hình ảnh và lấy hình ảnh cho vào folder uploads
 		$premited = array('jpg','jpeg','png','gif');
@@ -38,7 +41,7 @@ class Product
 		$unique_image = substr(md5(time()), 0,10).'.'.$file_ext;
 		$uploaded_image = "./uploads/".$unique_image;
 
-		if ($productName=="" || $brand=="" || $category=="" || $desc=="" || $price=="" || $type=="")
+		if ($productName=="" || $brand=="" || $category=="" || $desc=="" || $price=="" || $type=="" || $Productcode=="" || $Quantity=="")
 		{
 			$alert="<span class='error'>Fiels must be not empty</span>";
 			return $alert;
@@ -64,7 +67,7 @@ class Product
 				// nếu người dùng không chọn ảnh
 			}
 			move_uploaded_file($file_temp, $uploaded_image);
-			$query = "INSERT INTO tbl_product(category_id,brand_id,product_name,description,price,type,image)VALUES('$category','$brand','$productName','$desc','$price','$type','$unique_image')";
+			$query = "INSERT INTO tbl_product(catId,brandId,productName,product_code,productQuantity,product_desc,price,type,image)VALUES('$category','$brand','$productName','$Productcode','$Quantity','$desc','$price','$type','$unique_image')";
 			$result = $this->db->insert($query);
 			if($result)
 			{
@@ -89,7 +92,8 @@ class Product
 		$desc = mysqli_real_escape_string($this->db->link,$data['desc']);
 		$price = mysqli_real_escape_string($this->db->link,$data['price']);
 		$type = mysqli_real_escape_string($this->db->link,$data['type']);
-
+		$Productcode = mysqli_real_escape_string($this->db->link,$data['product_code']); 
+		$Quantity = mysqli_real_escape_string($this->db->link,$data['productQuantity']);
 		// kiểm tra hình ảnh và lấy hình ảnh cho vào folder uploads
 		$premited = array('jpg','jpeg','png','gif');
 		$file_name = $_FILES['image']['name'];
@@ -101,7 +105,7 @@ class Product
 		$unique_image = substr(md5(time()), 0,10).'.'.$file_ext;
 		$uploaded_image = "./uploads/".$unique_image;
 
-		if ($productName=="" || $brand=="" || $category_id=="" || $desc=="" || $price=="" || $type=="")
+		if ($productName=="" || $brand=="" || $category_id=="" || $desc=="" || $price=="" || $type=="" || $Productcode=="" || $Quantity=="")
 		{
 			$alert="<span class='error'>Fiels must be not empty</span>";
 			return $alert;
@@ -122,13 +126,13 @@ class Product
 					return $alert;
 				}
 					move_uploaded_file($file_temp, $uploaded_image);
-					$query = "UPDATE tbl_product SET category_id = '$category_id',brand_id='$brand',product_name='$productName',description='$desc',price='$price',type='$type',image='$unique_image' WHERE product_id = '$id'";
+					$query = "UPDATE tbl_product SET catId = '$category_id',brandId='$brand',productName='$productName',product_code='$Productcode',productQuantity='$Quantity', product_desc='$desc',price='$price',type='$type',image='$unique_image' WHERE productId = '$id'";
 					
 			}
 			else
 			{
 				// nếu người dùng không chọn ảnh
-				$query = "UPDATE tbl_product SET category_id = '$category_id',brand_id='$brand',product_name='$productName',description='$desc',price='$price',type='$type' WHERE product_id = '$id'";
+				$query = "UPDATE tbl_product SET catId = '$category_id',brandId='$brand',productName='$productName',product_desc='$desc',price='$price',type='$type' WHERE productId = '$id'";
 					
 			}
 			
@@ -150,24 +154,24 @@ class Product
 
 	public function fetchAll()
 	{
-		$query = "SELECT pro.*,cat.name,br.brand_name FROM tbl_product as pro
-		JOIN tbl_category as cat on pro.category_id = cat.category_id
-		JOIN tbl_brand as br on pro.brand_id  = br.brand_id 
-		 ORDER BY product_id DESC";
+		$query = "SELECT pro.*,cat.catName,br.brandName FROM tbl_product as pro
+		JOIN tbl_category as cat on pro.catId = cat.catId
+		JOIN tbl_brand as br on pro.brandId  = br.brandId 
+		 ORDER BY productId DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
 
 	public function fetchById($id)
 	{
-		$query = "SELECT * FROM tbl_product WHERE product_id = '$id'";
+		$query = "SELECT * FROM tbl_product WHERE productId = '$id'";
 		$result = $this->db->select($query);
 		return $result;
 	}
 
 	public function Delete($id)
 	{
-		$query = "DELETE FROM tbl_product WHERE product_id = '$id'";
+		$query = "DELETE FROM tbl_product WHERE productId = '$id'";
 		$result = $this->db->delete($query);
 		return $result;
 	}
@@ -184,27 +188,27 @@ class Product
 
 	public function getProductNew()
 	{
-		$query = "SELECT * FROM tbl_product ORDER BY product_id DESC LIMIT 4";
+		$query = "SELECT * FROM tbl_product ORDER BY productId DESC LIMIT 4";
 		$result = $this->db->select($query);
 		return $result;
 	}
 
 	public function getDetails($id)
 	{
-		$query = "SELECT pro.*,cat.name,br.brand_name FROM tbl_product as pro
-		JOIN tbl_category as cat on pro.category_id = cat.category_id
-		JOIN tbl_brand as br on pro.brand_id  = br.brand_id 
-		WHERE pro.product_id = '$id'
-		 ORDER BY product_id DESC";
+		$query = "SELECT pro.*,cat.catName,br.brandName FROM tbl_product as pro
+		JOIN tbl_category as cat on pro.catId = cat.catId
+		JOIN tbl_brand as br on pro.brandId  = br.brandId 
+		WHERE pro.productId = '$id'
+		ORDER BY productId DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
 
-	public function insertCompare($product_id,$customer_id)
+	public function insertCompare($productId,$customer_id)
 	{
-		$product_id = mysqli_real_escape_string($this->db->link,$product_id);
+		$productId = mysqli_real_escape_string($this->db->link,$productId);
 		$customer_id = mysqli_real_escape_string($this->db->link,$customer_id);
-		$checkCompare = "SELECT * FROM tbl_compare WHERE product_id = '$product_id' AND customer_id ='$customer_id'";
+		$checkCompare = "SELECT * FROM tbl_compare WHERE productId = '$productId' AND customer_id ='$customer_id'";
 		$resultCheck = $this->db->select($checkCompare);
 		if($resultCheck)
 		{
@@ -212,14 +216,14 @@ class Product
 			return $smg;
 		} else {
 
-				$query = "SELECT * FROM tbl_product WHERE product_id = $product_id";
+				$query = "SELECT * FROM tbl_product WHERE productId = $productId";
 				$result = $this->db->select($query)->fetch_assoc();
-				$productName = $result['product_name']; 
+				$productName = $result['productName']; 
 				$price = $result['price'];
 				$image = $result['image'];
 
-				$query_insert = "INSERT INTO tbl_compare(product_name,product_id,customer_id,price,image) 
-								VALUES('$productName','$product_id','$customer_id','$price','$image')";
+				$query_insert = "INSERT INTO tbl_compare(productName,productId,customer_id,price,image) 
+								VALUES('$productName','$productId','$customer_id','$price','$image')";
 				$query_insert_compare = $this->db->insert($query_insert);
 				if ($query_insert_compare) {
 						$alert="<span class='success'>Added Compare SuccessFully</span>";
@@ -247,12 +251,12 @@ class Product
 	}
 
 
-	public function insertWishlist($product_id,$customer_id)
+	public function insertWishlist($productId,$customer_id)
 	{
-		$product_id = mysqli_real_escape_string($this->db->link,$product_id);
+		$productId = mysqli_real_escape_string($this->db->link,$productId);
 		$customer_id = mysqli_real_escape_string($this->db->link,$customer_id);
 
-		$checkWlist = "SELECT * FROM tbl_wishlist WHERE product_id = '$product_id' AND customer_id ='$customer_id'";
+		$checkWlist = "SELECT * FROM tbl_wishlist WHERE productId = '$productId' AND customer_id ='$customer_id'";
 		
 		$resultCheck = $this->db->select($checkWlist);
 		if($resultCheck)
@@ -261,14 +265,14 @@ class Product
 			return $smg;
 		} else {
 
-				$query = "SELECT * FROM tbl_product WHERE product_id = $product_id";
+				$query = "SELECT * FROM tbl_product WHERE productId = $productId";
 				$result = $this->db->select($query)->fetch_assoc();
-				$productName = $result['product_name']; 
+				$productName = $result['productName']; 
 				$price = $result['price'];
 				$image = $result['image'];
 
-				$query_insert = "INSERT INTO tbl_wishlist(product_name,product_id,customer_id,price,image) 
-								VALUES('$productName','$product_id','$customer_id','$price','$image')";
+				$query_insert = "INSERT INTO tbl_wishlist(productName,productId,customer_id,price,image) 
+								VALUES('$productName','$productId','$customer_id','$price','$image')";
 				$query_insert_wlist = $this->db->insert($query_insert);
 				if ($query_insert_wlist) {
 						$alert="<span class='success'>Added to wishlist SuccessFully</span>";
@@ -311,7 +315,7 @@ class Product
 	public function countPage()
 	{
 
-		$query = "SELECT product_id FROM tbl_product";
+		$query = "SELECT productId FROM tbl_product";
 		$result = $this->db->select($query);
 		$cout = mysqli_num_rows($result);
 		$sotrang = ceil($cout/ 4);

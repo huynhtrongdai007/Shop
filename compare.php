@@ -22,24 +22,33 @@
 								<th width="10%">Action</th>
 							</tr>
 							<?php
-								    $customer_id = Session::get('customer_id');
-   									 $data = $pr->getAllCompareById($customer_id);
-								 foreach($data as $items):
+						    $customer_id = Session::get('customer_id');
+							 $data = $pr->getAllCompareById($customer_id);
+							 if (!empty($data)) {
 								
-							?>
-							<tr>
-								<td><?php echo $items['customer_id']; ?></td>
-								<td><?php echo $items['product_name']; ?></td>
-								<td>
-									<img src="./admin/uploads/<?php echo $items['image'];?>" alt="<?php echo $items['image'];?>"/>	
-								</td>
+								 foreach($data as $items):
+										
+									?>
+									<tr>
+										<td><?php echo $items['customer_id']; ?></td>
+										<td><?php echo $items['productName']; ?></td>
+										<td>
+											<img src="./admin/uploads/<?php echo $items['image'];?>" alt="<?php echo $items['image'];?>"/>	
+										</td>
 
-								<td><?php echo number_format($items['price'])." "."VND"; ?></td>
-								<td><a href="preview.php?id=<?php echo $items['product_id']; ?>">View</a> |
-								 <a onclick="return confirm('are you sure want this delete ?');" href="?id=<?php echo $items['id']; ?>">X</a></td>
-							</tr>
+										<td><?php echo number_format($items['price'])." "."VND"; ?></td>
+										<td><a href="preview.php?id=<?php echo $items['productId']; ?>">View</a> |
+										 <a onclick="return confirm('are you sure want this delete ?');" href="?id=<?php echo $items['id']; ?>">X</a></td>
+									</tr>
 
 						         <?php  endforeach; ?>
+						     <?php
+   								} else {
+   									echo"<td>không có sản phẩm</td>";
+   								}
+
+						      ?>    
+
 						</table>
 					</div>
 					<div class="shopping">

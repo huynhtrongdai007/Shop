@@ -29,16 +29,16 @@ include_once ($filepath.'/../helpers/format.php');
  		}
  		else
  		{
- 			$query = "SELECT name,password FROM tbl_admin WHERE name = '$adminUser' AND password = '$adminPass'";
+ 			$query = "SELECT adminName,adminPass FROM tbl_admin WHERE adminName = '$adminUser' AND adminPass = '$adminPass'";
  			$result = $this->db->select($query);
 
  			if($result != false)
  			{
  				$value = $result->fetch_assoc();
  				Session::set('adminlogin',true);
- 				Session::set('adminID',$value['id']);
- 				Session::set('adminUser',$value['name']);
- 				Session::set('adminPass',$value['password']);
+ 				Session::set('adminID',$value['adminId']);
+ 				Session::set('adminUser',$value['adminName']);
+ 				Session::set('adminPass',$value['adminPass']);
  				header("location:index.php");
  				exit();
  			}

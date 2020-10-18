@@ -52,15 +52,29 @@
              
 			<section class="slider">
 				  <div class="flexslider">
+				  
 					<ul class="slides">
-						<?php
+							<?php
+				  	$get_slier = $sl->getBytype();
 
-						$get_slier = $sl->getByStatus(); ?>
-						<?php foreach ($get_slier as $items): ?>
-						<li><img src="./admin/sliders/<?php echo $items['image'] ?>" alt=""/></li>
-					<?php endforeach; ?>
-						
+				  	 ?>
+				  		<?php 
+
+				  		foreach ($get_slier as $items) { 
+				  				$slider_info = array(
+				  				'slider_image' => $items['slider_image']
+					  		);
+
+				  		 ?>
+
+						<li>
+							<img src="./admin/sliders/<?php echo $slider_info['slider_image'];?>" alt=""/>
+						</li>
+						<?php
+						 	}
+						 ?>
 				    </ul>
+				  
 				  </div>
 	      </section>
 <!-- FlexSlider -->

@@ -27,7 +27,7 @@ class Category
 
 		else
 		{
-		    $query = "INSERT INTO tbl_category(name)VALUES('$cateName')";
+		    $query = "INSERT INTO tbl_category(catName)VALUES('$cateName')";
 			$result = $this->db->insert($query);
 			
 			if($result)	
@@ -56,7 +56,7 @@ class Category
 
 		else
 		{
-		    $query = "UPDATE tbl_category SET name='$cateName' WHERE id = '$id'";
+		    $query = "UPDATE tbl_category SET catName='$cateName' WHERE catid = '$id'";
 			$result = $this->db->update($query);
 			
 			if($result)	
@@ -75,21 +75,21 @@ class Category
 
 	public function fetchAll()
 	{
-		$query = "SELECT * FROM tbl_category ORDER BY category_id DESC";
+		$query = "SELECT * FROM tbl_category ORDER BY catId DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
 
 	public function fetchById($id)
 	{
-		$query = "SELECT * FROM tbl_category WHERE category_id = '$id'";
+		$query = "SELECT * FROM tbl_category WHERE catId = '$id'";
 		$result = $this->db->select($query);
 		return $result;
 	}
 
 	public function Delete($id)
 	{
-		$query = "DELETE FROM tbl_category WHERE category_id = '$id'";
+		$query = "DELETE FROM tbl_category WHERE catId = '$id'";
 		$result = $this->db->delete($query);
 		return $result;
 	}
@@ -98,7 +98,7 @@ class Category
 
 	public function fetchProductByCat($id)
 	{
-		$query = "SELECT *  FROM tbl_product WHERE category_id = '$id' ORDER BY category_id DESC";
+		$query = "SELECT *  FROM tbl_product WHERE catId = '$id' ORDER BY catId DESC";
 		$result = $this->db->delete($query);
 		return $result;
 	}

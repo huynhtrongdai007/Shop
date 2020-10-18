@@ -23,13 +23,13 @@ class Order
 		$getProduct = $this->db->select($query);
 		if ($getProduct) {
 			while ($result = $getProduct->fetch_assoc()) {
-				$productid = $result['productid'];
-				$productname = $result['productname'];
+				$productid = $result['productId'];
+				$productname = $result['productName'];
 				$quantity = $result['quantity'];
 				$price = $result['price'] * $quantity;
 				$image = $result['image'];
 				$customerid = $customer_id;
-				$queryInsert = "INSERT INTO tbl_order(product_id,product_name,customer_id,price,quantity,image)
+				$queryInsert = "INSERT INTO tbl_order(productId,productName,customer_id,price,quantity,image)
 						VALUES('$productid','$productname','$customerid','$price','$quantity','$image')";
 				 $this->db->insert($queryInsert);	
 			}
@@ -65,13 +65,21 @@ class Order
 		return $result;
 	}
 
+	// khach hang huy đơn hàng
+	public function deleteOrder($id) {
+		$query = "DELETE FROM tbl_order WHERE id = '$id'";
+		$result = $this->db->delete($query);
+		return $result;
+	}
+
+
 	public function shifted($id,$time,$price)
 	{
 		$id = mysqli_real_escape_string($this->db->link,$id);
 		$time = mysqli_real_escape_string($this->db->link,$time);
 		$price = mysqli_real_escape_string($this->db->link,$price);
 
-		$query = "UPDATE tbl_order SET status = 1 WHERE id = '$id' AND created_at = '$time' AND price ='$price'";
+		$query = "UPDATE tbl_order SET status = 1 WHERE id = '$id' AND date_order = '$time' AND price ='$price'";
 		$result = $this->db->update($query);
 		if($result)
 		{
@@ -90,7 +98,7 @@ class Order
 		$id = mysqli_real_escape_string($this->db->link,$id);
 		$time = mysqli_real_escape_string($this->db->link,$time);
 		$price = mysqli_real_escape_string($this->db->link,$price);
-		$query = "DELETE FROM tbl_order WHERE id = '$id' AND created_at = '$time' AND price ='$price'";
+		$query = "DELETE FROM tbl_order WHERE id = '$id' AND date_order = '$time' AND price ='$price'";
 		$result = $this->db->delete($query);
 		if($result)
 		{
@@ -105,12 +113,12 @@ class Order
 	}
 
 	public function shiptedConfirm($id,$time,$price)
-	{
+	{	
 		$id = mysqli_real_escape_string($this->db->link,$id);
 		$time = mysqli_real_escape_string($this->db->link,$time);
 		$price = mysqli_real_escape_string($this->db->link,$price);
 
-		$query = "UPDATE tbl_order SET status = 2 WHERE customer_id = '$id' AND created_at = '$time' AND price ='$price'";
+		$query = "UPDATE tbl_order SET status = 2 WHERE customer_id = '$id' AND date_order = '$time' AND price ='$price'";
 		$result = $this->db->update($query);
 		return $result;
 	}

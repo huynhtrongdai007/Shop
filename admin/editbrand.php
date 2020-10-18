@@ -18,7 +18,7 @@
     $item = $data_brand->fetch_assoc();
     if($_SERVER['REQUEST_METHOD']=='POST')
     {
-        $brandName = $_POST['name'];
+        $brandName = $_POST['brandName'];
         $updateBrand = $brand->updateBrand($id,$brandName);
     }
 
@@ -32,7 +32,7 @@
                     <table class="form">					
                         <tr>
                             <td>
-                                <input type="text" name="name" value="<?php echo $item['brand_name']; ?>" placeholder="Enter Brand Name..." class="medium" />
+                                <input type="text" name="brandName" value="<?php echo $item['brandName']; ?>" placeholder="Enter Brand Name..." class="medium" />
                             </td>
                         </tr>
 						<tr> 

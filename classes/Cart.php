@@ -22,12 +22,12 @@ class Cart
 		$id = mysqli_real_escape_string($this->db->link,$id);
 		$sId = session_id();
 
-		$query = "SELECT * FROM tbl_product WHERE product_id = '$id'";
+		$query = "SELECT * FROM tbl_product WHERE productId = '$id'";
 		$result = $this->db->select($query)->fetch_assoc();
 		
 		$image = $result['image'];
 		$price = $result['price'];
-		$productname = $result['product_name'];
+		$productname = $result['productName'];
 
 		$check_cart = "SELECT * FROM tbl_cart WHERE productid = '$id' AND sessionid = '$sId'";
 		$check_result = $this->db->select($check_cart);
@@ -57,7 +57,7 @@ class Cart
 	public function getCart()
 	{
 		$session_id = session_id();
-		$query = "SELECT * FROM tbl_cart WHERE sessionid = '$session_id' ORDER BY cartid desc";
+		$query = "SELECT * FROM tbl_cart WHERE sessionid = '$session_id' ORDER BY cartId desc";
 		$result = $this->db->select($query);
 		return $result;
 		
@@ -67,7 +67,7 @@ class Cart
 
 	public function updateCart($qty,$id)
 	{
-		$query = "UPDATE tbl_cart SET quantity = '$qty' WHERE cartid = '$id'";
+		$query = "UPDATE tbl_cart SET quantity = '$qty' WHERE cartId = '$id'";
 		$result = $this->db->update($query);
 		if($result)
 		{
@@ -82,7 +82,7 @@ class Cart
 
 	public function deleteCart($id)
 	{
-		$query = "DELETE FROM tbl_cart WHERE cartid = '$id'";
+		$query = "DELETE FROM tbl_cart WHERE cartId = '$id'";
 		$result = $this->db->delete($query);
 		if($result)
 		{

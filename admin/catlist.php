@@ -26,9 +26,9 @@
 						<?php $stt++; ?>
 						<tr class="odd gradeX">
 							<td><?php echo $stt; ?></td>
-							<td><?php echo $items['category_id']; ?></td>
-							<td><?php echo $items['name']; ?></td>
-							<td><a href="editcat.php?id=<?php  echo $items['category_id']; ?>">Edit</a> || <a onclick="return acceptDelete('are you sure want category delete this')" href="delcat.php?id=<?php echo $items['category_id'];?>">Delete</a></td>
+							<td><?php echo $items['catId']; ?></td>
+							<td><?php echo $items['catName']; ?></td>
+							<td><a href="editcat.php?id=<?php  echo $items['catId']; ?>">Edit</a> || <a onclick="return acceptDelete('are you sure want category delete this')" href="delcat.php?id=<?php echo $items['catId'];?>">Delete</a></td>
 						</tr>
 						<?php endforeach; ?>
 					</tbody>

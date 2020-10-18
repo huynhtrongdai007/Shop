@@ -25,7 +25,7 @@
                         <label>Title</label>
                     </td>
                     <td>
-                        <input type="text" name="title" placeholder="Enter Slider Title..." class="medium" />
+                        <input type="text" name="sliderName" placeholder="Enter Slider Title..." class="medium" />
                     </td>
                 </tr>           
     
@@ -34,13 +34,13 @@
                         <label>Upload Image</label>
                     </td>
                     <td>
-                        <input type="file" name="image"/>
+                        <input type="file" name="slider_image"/>
                     </td>
                 </tr>
                <tr>
                    <td>type</td>
                    <td>
-                    <select name="status">
+                    <select name="type">
                         <option value="0">Off</option>
                         <option value="1">On</option>        
                    </select>

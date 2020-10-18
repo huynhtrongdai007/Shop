@@ -32,7 +32,7 @@
                         <label>Title</label>
                     </td>
                     <td>
-                        <input type="text" name="title" value="<?php echo $getsliderById['title']; ?>" placeholder="Enter Slider Title..." class="medium" />
+                        <input type="text" name="sliderName" value="<?php echo $getsliderById['sliderName']; ?>" placeholder="Enter Slider Title..." class="medium" />
                     </td>
                 </tr>           
     
@@ -41,7 +41,7 @@
                         <label>Upload Image</label>
                     </td>
                     <td>
-                        <input type="file" name="image"/>
+                        <input type="file" name="slider_image"/>
                     </td>
                 </tr>
 				<tr>

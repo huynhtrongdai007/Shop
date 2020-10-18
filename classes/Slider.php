@@ -18,13 +18,13 @@ class Slider
 
 	public function insertSlider($data,$file)
 	{
-		$slidername = mysqli_real_escape_string($this->db->link,$data['title']);
-		$status = mysqli_real_escape_string($this->db->link,$data['status']);
+		$slidername = mysqli_real_escape_string($this->db->link,$data['sliderName']);
+		$type = mysqli_real_escape_string($this->db->link,$data['type']);
 		// kiểm tra hình ảnh và lấy hình ảnh cho vào folder uploads
 		$premited = array('jpg','jpeg','png','gif');
-		$file_name = $_FILES['image']['name'];
-		$file_size = $_FILES['image']['size'];
-		$file_temp = $_FILES['image']['tmp_name'];
+		$file_name = $_FILES['slider_image']['name'];
+		$file_size = $_FILES['slider_image']['size'];
+		$file_temp = $_FILES['slider_image']['tmp_name'];
 
 		$div = explode('.', $file_name);
 		$file_ext = strtolower(end($div));
@@ -49,7 +49,7 @@ class Slider
 					
 					
 						move_uploaded_file($file_temp, $uploaded_image);
-						$query = "INSERT INTO tbl_slider(title,status,image)VALUES('$slidername','$status','$unique_image')";
+						$query = "INSERT INTO tbl_slider(sliderName,type,slider_image)VALUES('$slidername','$type','$unique_image')";
 						$result = $this->db->insert($query);
 						if($result)
 						{
@@ -71,13 +71,13 @@ class Slider
 
 	public function updateSlider($data,$files,$id)
 	{
-		$slidername = mysqli_real_escape_string($this->db->link,$data['title']);
+		$slidername = mysqli_real_escape_string($this->db->link,$data['sliderName']);
 
 		// kiểm tra hình ảnh và lấy hình ảnh cho vào folder uploads
 		$premited = array('jpg','jpeg','png','gif');
-		$file_name = $_FILES['image']['name'];
-		$file_size = $_FILES['image']['size'];
-		$file_temp = $_FILES['image']['tmp_name'];
+		$file_name = $_FILES['slider_image']['name'];
+		$file_size = $_FILES['slider_image']['size'];
+		$file_temp = $_FILES['slider_image']['tmp_name'];
 
 		$div = explode('.', $file_name);
 		$file_ext = strtolower(end($div));
@@ -99,13 +99,13 @@ class Slider
 					return $alert;
 				}
 					move_uploaded_file($file_temp, $uploaded_image);
-					$query = "UPDATE tbl_slider SET title = '$slidername',image='$unique_image' WHERE slider_id = '$id'";
+					$query = "UPDATE tbl_slider SET sliderName = '$slidername',slider_image='$unique_image' WHERE sliderId = '$id'";
 					
 			}
 			else
 			{
 				// nếu người dùng không chọn ảnh
-				$query = "UPDATE tbl_slider SET title = '$slidername' WHERE slider_id = '$id'";
+				$query = "UPDATE tbl_slider SET sliderName = '$slidername' WHERE sliderId = '$id'";
 					
 			}
 			
@@ -127,35 +127,35 @@ class Slider
 
 	public function getBYId($id)
 	{
-		$query = "SELECT * FROM tbl_slider WHERE slider_id = '$id'";
+		$query = "SELECT * FROM tbl_slider WHERE sliderId = '$id'";
 		$result = $this->db->select($query);
 		return $result;
 	}
 
 	public function getAllSlider()
 	{
-		$query = "SELECT * FROM tbl_slider ORDER BY slider_id DESC";
+		$query = "SELECT * FROM tbl_slider ORDER BY sliderId DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
 
-	public function getByStatus()
+	public function getBytype()
 	{
-		$query = "SELECT * FROM tbl_slider WHERE status = 1 ORDER BY slider_id DESC";
+		$query = "SELECT * FROM tbl_slider WHERE type = 1 ORDER BY sliderId DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
 
-	public function updateStatus($id,$status){
-		$status = mysqli_real_escape_string($this->db->link,$status);
-		$query = "UPDATE tbl_slider SET status = '$status' WHERE slider_id = '$id'";
+	public function updatetype($id,$type){
+		$type = mysqli_real_escape_string($this->db->link,$type);
+		$query = "UPDATE tbl_slider SET type = '$type' WHERE sliderId = '$id'";
 		$result = $this->db->update($query);
 		return $result;
 	}	
 
 	public function deleteSlider($id)
 	{
-		$query = "DELETE FROM tbl_slider WHERE slider_id = '$id'";
+		$query = "DELETE FROM tbl_slider WHERE sliderId = '$id'";
 		$result = $this->db->delete($query);
 		return $result;
 	}

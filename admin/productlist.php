@@ -15,9 +15,13 @@ $fm = new Format();
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Post Title</th>
-					<th>Description</th>
+					<th>Code</th>
+					<th>Tên Sản Phẩm</th>
+					<th>Số Lượng Nhập</th>
+					<th>Đã Bán</th>
+					<th>Số Lượng Tồn</th>
 					<th>Category</th>
+					<th>Thương Hiệu</th>
 					<th>Image</th>
 					<th>Type</th>
 					<th>Action</th>
@@ -26,13 +30,17 @@ $fm = new Format();
 			<tbody>
 				<?php foreach ($data_pro as $items): ?>
 				<tr class="odd gradeX">
-					<td><?php echo $items['product_id']; ?></td>
-					<td><?php echo $items['product_name'];?></td>
-					<td><?php echo $fm->textShorten($items['description'],30);?></td>
-					<td><?php echo $items['name']; ?></td>
+					<td><?php echo $items['productId']; ?></td>
+					<td><?php echo $items['product_code']; ?></td>
+					<td><?php echo $items['productName'];?></td>
+					<td><?php echo $items['productQuantity'];?></td>
+					<td><?php echo $items['product_soldout'];?></td>
+					<td><?php echo $items['product_remain'];?></td>
+					<td><?php echo $items['catName']; ?></td>
+					<td><?php echo $items['brandName']; ?></td>
 					<td class="center"><img src="./uploads/<?php echo $items['image'];?>" alt="image" height="80"/></td>
 					<td><?php if($items['type']==1){echo"Featherad";}else{echo"Non-Featherad";} ?></td>
-					<td><a href="editproduct.php?id=<?php echo $items['product_id']; ?>">Edit</a> || <a href="delproduct.php?id=<?php echo $items['product_id']; ?>" onclick="return acceptDelete('are you sure want category delete this')">Delete</a></td>
+					<td><a href="editproduct.php?id=<?php echo $items['productId']; ?>">Edit</a> || <a href="delproduct.php?id=<?php echo $items['productId']; ?>" onclick="return acceptDelete('are you sure want category delete this')">Delete</a></td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>

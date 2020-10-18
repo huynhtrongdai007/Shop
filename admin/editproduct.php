@@ -34,7 +34,23 @@
                         <label>Name</label>
                     </td>
                     <td>
-                        <input type="text" name="name" value="<?php echo $item['product_name'];?>" class="medium" />
+                        <input type="text" name="name" value="<?php echo $item['productName'];?>" class="medium" />
+                    </td>
+                </tr>
+                <tr>
+                     <td>
+                        <label>Code</label>
+                    </td>
+                    <td>
+                        <input type="text" name="product_code" value="<?php echo $item['product_code'] ?>" placeholder="Enter Product Code..." class="medium">
+                    </td>
+                </tr>
+                 <tr>
+                     <td>
+                        <label>Quantity</label>
+                    </td>
+                    <td>
+                        <input type="text" name="productQuantity"  value="<?php echo $item['productQuantity'] ?>" placeholder="Enter Quantity Product..." class="medium">
                     </td>
                 </tr>
 				<tr>
@@ -50,8 +66,8 @@
                              ?>
                              <?php foreach ($catlist as $data_cat):?>
                              <option
-                               <?php if($data_cat['category_id']==$item['category_id']){echo"selected";}?> 
-                              value="<?php echo $data_cat['category_id'];?>"><?php echo $data_cat['name'];?></option>
+                               <?php if($data_cat['catId']==$item['catId']){echo"selected";}?> 
+                              value="<?php echo $data_cat['catId'];?>"><?php echo $data_cat['catName'];?></option>
                              <?php endforeach; ?>
                         </select>   
                     </td>
@@ -69,8 +85,8 @@
                              ?>
                              <?php foreach ($branlist as $data_brand):?>
                              <option
-                               <?php if($data_brand['brand_id']==$item['brand_id']){echo"selected";} ?> 
-                              value="<?php echo $data_brand['brand_id'];?>"><?php echo $data_brand['brand_name']; ?></option>
+                               <?php if($data_brand['brandId']==$item['brandId']){echo"selected";} ?> 
+                              value="<?php echo $data_brand['brandId'];?>"><?php echo $data_brand['brandName']; ?></option>
                              <?php endforeach; ?>
                         </select>
                     </td>
@@ -81,7 +97,7 @@
                         <label>Description</label>
                     </td>
                     <td>
-                        <textarea class="tinymce" name="desc"><?php echo $item['description']; ?></textarea>
+                        <textarea class="tinymce" name="desc"><?php echo $item['product_desc']; ?></textarea>
                     </td>
                 </tr>
 				<tr>

@@ -3,11 +3,11 @@
 <?php include '../classes/Slider.php'; ?>
 <?php 
 		$sl = new Slider();
-		if(isset($_GET['id']) && isset($_GET['status']))
+		if(isset($_GET['id']) && isset($_GET['type']))
 		{
 			$id = $_GET['id'];
-			$status = $_GET['status'];
-			$sl->updateStatus($id,$status);
+			$status = $_GET['type'];
+			$sl->updatetype($id,$status);
 		}
 
  ?>
@@ -32,18 +32,18 @@
 			<?php foreach ($data as $items):?>
 				<tr class="odd gradeX">
 
-					<td><?php echo $items['slider_id'] ?></td>
-					<td><?php echo $items['title'] ?></td>
-					<td><img src="./sliders/<?php echo $items['image']; ?>" height="80px"/></td>
+					<td><?php echo $items['sliderId'] ?></td>
+					<td><?php echo $items['sliderName'] ?></td>
+					<td><img src="./sliders/<?php echo $items['slider_image']; ?>" height="80px"/></td>
 					<td>
-						<?php if($items['status']==1){?>
-						<a href="?id=<?php echo $items['slider_id'] ?>&status=0">On</a>
+						<?php if($items['type']==1){?>
+						<a href="?id=<?php echo $items['sliderId'] ?>&type=0">On</a>
 						<?php }else{ ?>
-							<a href="?id=<?php echo $items['slider_id'] ?>&status=1">Off</a>
+							<a href="?id=<?php echo $items['sliderId'] ?>&type=1">Off</a>
 						<?php } ?>
 					</td>				
 					<td>
-						<a href="editslider.php?id=<?php echo $items['slider_id'] ?>">Edit</a> || 
+						<a href="editslider.php?id=<?php echo $items['sliderId'] ?>">Edit</a> || 
 						<a onclick="return confirm('Are you sure to Delete!');" href="delslider?id=<?php echo $items['slider_id'] ?>">Delete</a> 
 					</td>
 				</tr>	

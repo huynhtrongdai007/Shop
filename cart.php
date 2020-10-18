@@ -16,12 +16,6 @@
     $subtotal = 0;
 
  ?>
- <?php 
-
- 
- 	
-  ?>
-
  <div class="main">
     <div class="content">
     	<div class="cartoption">		
@@ -51,19 +45,19 @@
 							
 							<tr>
 
-								<td><?php echo $items['productname']; ?></td>
+								<td><?php echo $items['productName']; ?></td>
 								<td><img src="./admin/uploads/<?php echo $items['image'];?>" alt="<?php echo $items['image'];?>"/></td>
 								<td><?php echo number_format($items['price'])." "."VND"; ?></td>
 								<td>
 									<form action="" method="post">
-										<input type="hidden" name="cardId" value="<?php echo $items['cartid'];?>">
+										<input type="hidden" name="cardId" value="<?php echo $items['cartId'];?>">
 										<input type="number" min="1" name="quantity" value="<?php echo $items['quantity']; ?>"/>
 										<input type="submit" name="submit" value="Update"/>
 									</form>
 								</td>
 								<?php $total = $items['price'] * $items['quantity']; ?>
 								<td><?php echo number_format($total);?></td>
-								<td><a href="?id=<?php echo $items['cartid']; ?>">X</a></td>
+								<td><a href="?id=<?php echo $items['cartId']; ?>">X</a></td>
 							</tr>
 							<?php $subtotal += $total;?>
 						<?php  endforeach; ?>

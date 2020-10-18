@@ -52,7 +52,7 @@
 							
 							<tr>
 
-								<td><?php echo $items['productname']; ?></td>
+								<td><?php echo $items['productName']; ?></td>
 								<td><?php echo number_format($items['price'])." "."VND"; ?></td>
 								<td><?php echo $items['quantity']; ?></td>
 								<?php $total = $items['price'] * $items['quantity']; ?>

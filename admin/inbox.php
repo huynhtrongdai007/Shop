@@ -30,14 +30,15 @@ include_once ($filepath.'/../helpers/format.php');
                 	}
                  ?>
                 <div class="block">        
-                    <table class="data display datatable" id="example">
+                    <table class="data display datatable" >
 					<thead>
 						<tr>
 							<th>Serial No.</th>
-							<th>Order Time</th>
-							<th>Product</th>
-							<th>Quantity</th>
-							<th>Price</th>
+							<th>Ngày Đặt</th>
+							<th>Sản Phẩm</th>
+							<th>Số Lượng</th>
+							<th>Giá</th>	
+							<th>Khách hàng</th>
 							<th>Address</th>
 							<th>Action</th>
 						</tr>
@@ -54,15 +55,16 @@ include_once ($filepath.'/../helpers/format.php');
 						 ?>
 						<tr class="odd gradeX">
 							<td><?php echo $items['id']; ?></td>
-							<td><?php echo $fm->formatDate($items['created_at']); ?></td>
-							<td><?php echo $items['product_name']; ?></td>
+							<td><?php echo $fm->formatDate($items['date_order']); ?></td>
+							<td><?php echo $items['productName']; ?></td>
 							<td><?php echo $items['quantity']; ?></td>
 							<td><?php echo number_format($items['price']).' '.'VNĐ'; ?></td>
+							<td><?php echo $items['customer_id']?></td>
 							<td><a href="customer.php?customerid=<?php echo $items['customer_id']; ?>">View Address</a></td>
 							<td>
 								<?php if($items['status']==0){
 								?>
-								<a href="update_status.php?shiftid=<?php echo $items['id'] ?>&time=<?php echo $items['created_at'] ?>&price=<?php echo $items['price'] ?>">Pending</a>
+								<a href="update_status.php?shiftid=<?php echo $items['id'] ?>&time=<?php echo $items['date_order'] ?>&price=<?php echo $items['price'] ?>">Pending</a>
 								<?php 
 									}elseif($items['status']==1){
 								 ?>
@@ -70,7 +72,7 @@ include_once ($filepath.'/../helpers/format.php');
 								 <?php 
 								}else{
 								  ?>
-								  <a href="?delid=<?php echo $items['id'] ?>&time=<?php echo $items['created_at'] ?>&price=<?php echo $items['price'] ?>">Remove</a>
+								  <a href="?delid=<?php echo $items['id'] ?>&time=<?php echo $items['date_order'] ?>&price=<?php echo $items['price'] ?>">Remove</a>
 								  <?php 
 								  	}
 								   ?>

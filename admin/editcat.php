@@ -29,7 +29,7 @@
                     <table class="form">					
                         <tr>
                             <td>
-                                <input type="text" name="name" value="<?php echo $items['name']; ?>" placeholder="Enter Category Name..." class="medium" />
+                                <input type="text" name="name" value="<?php echo $items['catName']; ?>" placeholder="Enter Category Name..." class="medium" />
                             </td>
                         </tr>
 						<tr> 

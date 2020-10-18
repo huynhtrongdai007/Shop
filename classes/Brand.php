@@ -29,7 +29,7 @@ include_once ($filepath.'/../helpers/format.php');
  			$alert="<span class='error'>name brand be not empty</span>";
  			return $alert;
  		} 
- 		elseif(strlen($brandName) > 10)
+ 		elseif(strlen($brandName) < 10)
  		{
 		$alert="<span class='error'>name brand khong vuot qua 10 ky tu</span>";
  			return $alert;
@@ -44,7 +44,7 @@ include_once ($filepath.'/../helpers/format.php');
  			}
  			else
  			{
- 				$query = "INSERT INTO tbl_brand(brand_name) VALUES('$brandName')";
+ 				$query = "INSERT INTO tbl_brand(brandName) VALUES('$brandName')";
  				$result = $this->db->insert($query);
 
 	 			if($result)
@@ -81,7 +81,7 @@ include_once ($filepath.'/../helpers/format.php');
  		}
  		else
  		{
- 			$query = "UPDATE tbl_brand SET brand_name = '$brandName' WHERE brand_id = '$id'";
+ 			$query = "UPDATE tbl_brand SET brandName = '$brandName' WHERE brandId = '$id'";
  			$result = $this->db->update($query);
 
  			if($result)
@@ -101,28 +101,28 @@ include_once ($filepath.'/../helpers/format.php');
 
  	public function fetchAll()
  	{
- 		$query = "SELECT * FROM tbl_brand ORDER BY brand_id DESC";
+ 		$query = "SELECT * FROM tbl_brand ORDER BY brandId DESC";
  		$result = $this->db->select($query);
  		return $result;
  	}
 
  	public function fetchById($id)
  	{
- 		$query = "SELECT * FROM tbl_brand WHERE brand_id = '$id'";
+ 		$query = "SELECT * FROM tbl_brand WHERE brandId = '$id'";
  		$result = $this->db->select($query);
  		return $result;
  	}
 
  	public function Delete($id)
  	{
- 		$query = "DELETE FROM tbl_brand WHERE brand_id = '$id'";
+ 		$query = "DELETE FROM tbl_brand WHERE brandId = '$id'";
  		$result = $this->db->delete($query);
  		return $result;
  	}
 	// kiem tra ten co trong db chua
  	public function checkName($name)
  	{
- 		$query = "SELECT brand_name FROM tbl_brand WHERE brand_name = '$name'";
+ 		$query = "SELECT brandName FROM tbl_brand WHERE brandName = '$name'";
  		$result = $this->db->select($query);
  		return $result;
  	}
