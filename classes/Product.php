@@ -67,7 +67,7 @@ class Product
 				// nếu người dùng không chọn ảnh
 			}
 			move_uploaded_file($file_temp, $uploaded_image);
-			$query = "INSERT INTO tbl_product(catId,brandId,productName,product_code,productQuantity,product_desc,price,type,image)VALUES('$category','$brand','$productName','$Productcode','$Quantity','$desc','$price','$type','$unique_image')";
+			$query = "INSERT INTO tbl_product(catId,brandId,productName,product_code,productQuantity,product_remain,product_desc,price,type,image)VALUES('$category','$brand','$productName','$Productcode','$Quantity','$Quantity','$desc','$price','$type','$unique_image')";
 			$result = $this->db->insert($query);
 			if($result)
 			{
@@ -175,6 +175,64 @@ class Product
 		$result = $this->db->delete($query);
 		return $result;
 	}
+
+
+
+public function show_product_warehouse(){
+			$query = 
+			"SELECT tbl_product.*, tbl_warehouse.*
+
+			 FROM tbl_product INNER JOIN tbl_warehouse ON tbl_product.productId = tbl_warehouse.id_sanpham
+								
+			 order by tbl_warehouse.sl_ngaynhap desc ";
+
+		
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+
+public function update_quantity_product($data,$files,$id){
+			$product_more_quantity = mysqli_real_escape_string($this->db->link, $data['product_more_quantity']);
+			$product_remain = mysqli_real_escape_string($this->db->link, $data['product_remain']);
+			
+			if($product_more_quantity == ""){
+
+				$alert = "<span class='error'>Fields must be not empty</span>";
+				return $alert; 
+			}else{
+					$qty_total = $product_more_quantity + $product_remain;
+				
+					$query = "UPDATE tbl_product SET
+					
+					product_remain = '$qty_total'
+
+					WHERE productId = '$id'";
+					
+					}
+					$query_warehouse = "INSERT INTO tbl_warehouse(id_sanpham,sl_nhap) VALUES('$id','$product_more_quantity') ";
+					$result_insert = $this->db->insert($query_warehouse);
+					$result = $this->db->update($query);
+
+					if($result){
+						$alert = "<span class='success'>Thêm số lượng thành công</span>";
+						return $alert;
+					}else{
+						$alert = "<span class='error'>Thêm số lượng không thành công</span>";
+						return $alert;
+					}
+				
+		}
+
+
+
+
+
+
+
+
+
+
 // -------------------------------Front-end----------------------------------------
 
 	public function getProductFeathered($trang)

@@ -42,6 +42,12 @@
                         <li><a href="productlist.php">Product List</a> </li>
                     </ul>
                 </li>
+                <li><a class="menuitem">Kho Hàng</a>
+                    <ul class="submenu">
+                        <li><a href="warehouse.php">Quản lý kho</a> </li>
+                     
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

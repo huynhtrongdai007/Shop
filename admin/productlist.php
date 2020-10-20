@@ -17,6 +17,7 @@ $fm = new Format();
 					<th>ID</th>
 					<th>Code</th>
 					<th>Tên Sản Phẩm</th>
+					<th>Nhập Hàng</th>
 					<th>Số Lượng Nhập</th>
 					<th>Đã Bán</th>
 					<th>Số Lượng Tồn</th>
@@ -33,6 +34,7 @@ $fm = new Format();
 					<td><?php echo $items['productId']; ?></td>
 					<td><?php echo $items['product_code']; ?></td>
 					<td><?php echo $items['productName'];?></td>
+					<th><a href="productmorequantity.php?productid=<?php echo $items['productId'] ?>">Nhập Hàng</a></th>
 					<td><?php echo $items['productQuantity'];?></td>
 					<td><?php echo $items['product_soldout'];?></td>
 					<td><?php echo $items['product_remain'];?></td>
