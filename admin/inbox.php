@@ -63,8 +63,7 @@ include_once ($filepath.'/../helpers/format.php');
 							<td><a href="customer.php?customerid=<?php echo $items['customer_id']; ?>">View Address</a></td>
 							<td>
 								<?php if($items['status']==0){
-								?>
-								<a href="update_status.php?shiftid=<?php echo $items['id'] ?>&time=<?php echo $items['date_order'] ?>&price=<?php echo $items['price'] ?>">Pending</a>
+								?><a href="update_status.php?shiftid=<?php echo $items['id']?>&proid=<?php echo $items['productId'] ?>&qty=<?php echo $items['quantity']?>&time=<?php echo $items['date_order'] ?>&price=<?php echo $items['price'] ?>">Pending</a>
 								<?php 
 									}elseif($items['status']==1){
 								 ?>

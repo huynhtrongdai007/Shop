@@ -72,26 +72,58 @@ class Order
 		return $result;
 	}
 
-
-	public function shifted($id,$time,$price)
-	{
-		$id = mysqli_real_escape_string($this->db->link,$id);
-		$time = mysqli_real_escape_string($this->db->link,$time);
-		$price = mysqli_real_escape_string($this->db->link,$price);
-
-		$query = "UPDATE tbl_order SET status = 1 WHERE id = '$id' AND date_order = '$time' AND price ='$price'";
-		$result = $this->db->update($query);
-		if($result)
+		public function shifted($id,$proid,$qty,$time,$price)
 		{
-			$alert = "<span class='success'>Update Order SuccessFully</span>";
-			return $alert;
+			$id = mysqli_real_escape_string($this->db->link, $id);
+			$proid = mysqli_real_escape_string($this->db->link, $proid);
+			$qty = mysqli_real_escape_string($this->db->link, $qty);
+			$time = mysqli_real_escape_string($this->db->link, $time);
+			$price = mysqli_real_escape_string($this->db->link, $price);
+
+			$query_select = "SELECT * FROM tbl_product WHERE productId='$proid'";
+			$get_select = $this->db->select($query_select);
+
+			if($get_select){
+				while($result = $get_select->fetch_assoc()){
+					$soluong_new = $result['product_remain'] - $qty;
+					$qty_soldout = $result['product_soldout'] + $qty;
+
+					$query_soluong = "UPDATE tbl_product SET
+
+					product_remain = '$soluong_new',product_soldout = '$qty_soldout' WHERE productId = '$proid'";
+					 $this->db->update($query_soluong);
+				}
+			}
+
+			$query = "UPDATE tbl_order SET
+
+			status = '1'
+
+			WHERE id = '$id' AND date_order = '$time' AND price = '$price' ";
+		    $this->db->update($query);
+			
 		}
-		else
-		{
-			$alert = "<span class='error'>Update Order Not Success/span>";
-			return $alert;
-		}
-	}
+
+		
+	// public function shifted($id,$time,$price)
+	// {
+	// 	$id = mysqli_real_escape_string($this->db->link,$id);
+	// 	$time = mysqli_real_escape_string($this->db->link,$time);
+	// 	$price = mysqli_real_escape_string($this->db->link,$price);
+
+	// 	$query = "UPDATE tbl_order SET status = 1 WHERE id = '$id' AND date_order = '$time' AND price ='$price'";
+	// 	$result = $this->db->update($query);
+	// 	if($result)
+	// 	{
+	// 		$alert = "<span class='success'>Update Order SuccessFully</span>";
+	// 		return $alert;
+	// 	}
+	// 	else
+	// 	{
+	// 		$alert = "<span class='error'>Update Order Not Success/span>";
+	// 		return $alert;
+	// 	}
+	// }
 
 	public function deleteShifted($id,$time,$price)
 	{

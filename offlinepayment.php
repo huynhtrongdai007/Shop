@@ -10,11 +10,11 @@
     	exit();
     }
 
-    // if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit']))
-    // {
-    // 	$quantity = $_POST['quantity'];
-    //     $addCart = $ct->addToCart($quantity,$id);
-    // }
+    if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit']))
+    {
+    	$quantity = $_POST['quantity'];
+        $addCart = $ct->addToCart($quantity,$id);
+    }
 
  ?>
  <div class="main">
