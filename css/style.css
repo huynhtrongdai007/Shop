@@ -2547,3 +2547,44 @@ margin-right: 10px;
 border: 0px;
 background: #000;
 }
+
+
+#form-comment {
+	max-width: 75%;
+}
+
+
+.submit-comment {
+
+	border: 0px;
+    padding: 15px;
+    color: #fff;
+    background: #000;
+    cursor: pointer;
+    	margin-top: 20px;
+}
+
+
+.user {
+	font-weight: bold;
+	color: black;
+	margin-bottom: 10px;
+}
+
+.time {
+	color: gray;
+	margin-left: 20px;
+}
+
+.userComment {
+	color:#000;
+}
+
+.replies .comment {
+	margin-top: 20px;
+}
+
+.replies {
+	margin-left: 20px;
+
+}

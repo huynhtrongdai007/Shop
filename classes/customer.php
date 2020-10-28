@@ -125,4 +125,23 @@ include_once ($filepath.'/../helpers/format.php');
  		return $result;
  	}
 
+ 	public function Comment($id,$data) {	
+ 		
+ 			$query = "INSERT INTO comments(customer_id,comment,created_at)VALUES($id,'$data',NOW())";
+	 		$result = $this->db->insert($query);
+	 		return $result;
+ 	}
+
+ 	public function coutComment() {
+ 		$query = "SELECT id FROM comments";
+ 		$result = $this->db->select($query);
+ 		return $result;
+ 	}
+
+ 	public function getComment() {
+ 		$query = "SELECT * FROM comments";
+ 		$result = $this->db->select($query);
+ 		return $result;
+ 	}
+
 }

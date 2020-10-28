@@ -23,11 +23,32 @@
     }
 
 
- if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit']))
+ 	if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit']))
     {
     	$quantity = $_POST['quantity'];	
         $insertCart = $ct->addToCart($quantity,$id);
     }
+
+    if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['addComment']))
+    {
+    	 $comment = $_POST['comment'];
+    	 $customer_id = session::get('customer_id');
+
+    	if (empty($comment)) {
+    		echo"";
+    	} else {
+	       $cus->Comment($customer_id,$comment);
+    	}
+    }
+	
+	// diem so luong binh luan  
+	$sqlNumComments = $cus->coutComment();
+	$numComments  = $sqlNumComments->num_rows;
+
+	// lay binh luan
+	$datacomment = $cus->getComment()
+
+
  ?>
  <div class="main">
     <div class="content">
@@ -91,7 +112,34 @@
 			<h2>Product Details</h2>
 			<p><?php echo  $item['product_desc']; ?></p>
 	    </div>
-				
+	 
+	<?php 
+		if(!empty(session::get('customer_id'))){
+	?>
+		<div id="form-comment">
+
+		 <form action="" method="POST">
+			<textarea  name="comment" cols="100" style="height: 100px;" placeholder="Enter Comment"></textarea>
+			<input type="hidden" id="customer_id_comment" value="<?php echo Session::get('customer_id');?>">
+			<div style="clear: both;"></div>	
+			 <input type="submit" style="float: right;" class="submit-comment" name="addComment" value="submit" >
+			</form>
+		</div>
+		<h2><b><?php echo $numComments;?> comments</b></h2>
+			<div class="userComments">
+				<div class="comment">
+					<?php 
+						while ($comment = $datacomment->fetch_assoc()) {
+					 ?>
+					<div class="user"><?php echo $comment['comment'];?><span class="time"><?php echo $comment['created_at']; ?></span></div>
+					<?php 
+						}
+					 ?>
+				</div>
+			</div>
+	<?php 
+		}
+	 ?>
 	</div>
 				<div class="rightsidebar span_3_of_1">
 					<h2>CATEGORIES</h2>
@@ -108,3 +156,4 @@
  	</div>
  </div>
    <?php include 'inc/footer.php'; ?>
+

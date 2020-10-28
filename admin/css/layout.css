@@ -1161,3 +1161,17 @@ td.details {
 
 .gallery-sand .sorting{background-color:white !important;}
 table.form select{width:200px;}
+
+#addComment {
+	margin-top: 20px;
+	float: right;
+}
+
+.replies .comment {
+		margin-top: 20px;
+	}
+
+.replies {
+	margin-left: 20px;
+
+}
