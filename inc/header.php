@@ -16,6 +16,7 @@ spl_autoload_register(function($ClsName){
 	$cus = new Customer();
 	$od = new Order();
 	$sl = new Slider();
+	$contact = new Contact();
  ?>
  <?php 
  	if (!isset($_POST['btn_search'])) {
