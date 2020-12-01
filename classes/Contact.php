@@ -21,6 +21,15 @@ class Contact
 		return $result;
 	}
 
+	public function fetchById($id)
+	{
+		$query = "SELECT * FROM tbl_contact WHERE id = '$id'";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+
+
 	public function addContact($data) {
 
 		$name = mysqli_real_escape_string($this->db->link,$data['name']);
@@ -45,5 +54,12 @@ class Contact
 			}
 		}
 	}
+
+	public function Delete($id)
+ 	{
+ 		$query = "DELETE FROM tbl_contact WHERE id = '$id'";
+ 		 $this->db->delete($query);
+ 		return $result;
+ 	}
 }
 
