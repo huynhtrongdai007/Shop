@@ -21,6 +21,7 @@
 					<th>No.</th>
 					<th>Slider Title</th>
 					<th>Slider Image</th>
+					<th>Link</th>
 					<th>Status</th>
 					<th>Action</th>
 				</tr>
@@ -35,6 +36,7 @@
 					<td><?php echo $items['sliderId'] ?></td>
 					<td><?php echo $items['sliderName'] ?></td>
 					<td><img src="./sliders/<?php echo $items['slider_image']; ?>" height="80px"/></td>
+					<td><?php echo $items['link']; ?></td>
 					<td>
 						<?php if($items['type']==1){?>
 						<a href="?id=<?php echo $items['sliderId'] ?>&type=0">On</a>

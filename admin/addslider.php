@@ -37,6 +37,12 @@
                         <input type="file" name="slider_image"/>
                     </td>
                 </tr>
+                <tr>
+                    <td>Link</td>
+                    <td>
+                        <input type="text" name="link" placeholder="Enter Slider Link" class="medium">
+                    </td>
+                </tr>
                <tr>
                    <td>type</td>
                    <td>

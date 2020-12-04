@@ -22,7 +22,7 @@
 				    <div class="text list_2_of_1">
 						<h2><?php echo  $item1['brandName']; ?> </h2>
 						<p><?php echo $item1['product_desc']; ?></p>
-						<div class="button"><span><a href="preview.html">Add to cart</a></span></div>
+						<div class="button"><span><a href="preview.php?id=<?php echo $item1['productId'] ?>">Add to cart</a></span></div>
 				   </div>
 
 			   </div>			
@@ -33,8 +33,8 @@
 				    <div class="text list_2_of_1">
 						<h2><?php echo $item2['brandName']; ?></h2>
 						<p><?php echo $fm->shorter($item2['product_desc'],50); ?></p>
-						<div class="button"><span><a href="preview.html">Add to cart</a></span></div>
-				   </div>
+						<div class="button"><span><a href="preview.php?id=<?php echo $item2['productId'] ?>">Add to cart</a></span></div>
+				   </div>		
 
 			   </div>			
 			</div>
@@ -47,7 +47,7 @@
 				    <div class="text list_2_of_1">
 						<h2><?php echo $item3['brandName']; ?></h2>
 						<p><?php echo $fm->shorter($item3['product_desc'],100); ?></p>
-						<div class="button"><span><a href="preview.html">Add to cart</a></span></div>
+						<div class="button"><span><a href="preview.php?id=<?php echo $item3['productId'] ?>">Add to cart</a></span></div>
 				   </div>
 
 			   </div>	
@@ -58,7 +58,7 @@
 				    <div class="text list_2_of_1">
 						<h2><?php echo $item4['brandName']; ?></h2>
 						<p><?php echo $fm->shorter($item4['product_desc'],40); ?></p>
-						<div class="button"><span><a href="preview.html">Add to cart</a></span></div>
+						<div class="button"><span><a href="preview.php?id=<?php echo $item4['productId'] ?>">Add to cart</a></span></div>
 				   </div>
 
 			   </div>					
@@ -86,7 +86,9 @@
 				  		 ?>
 
 						<li>
-							<img src="./admin/sliders/<?php echo $slider_info['slider_image'];?>" alt=""/>
+							<a href="<?php echo $items['link'] ?>">
+								<img src="./admin/sliders/<?php echo $slider_info['slider_image'];?>" alt=""/>
+							</a>
 						</li>
 						<?php
 						 	}

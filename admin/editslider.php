@@ -35,14 +35,21 @@
                         <input type="text" name="sliderName" value="<?php echo $getsliderById['sliderName']; ?>" placeholder="Enter Slider Title..." class="medium" />
                     </td>
                 </tr>           
-    
                 <tr>
+                    
                     <td>
+                        
                         <label>Upload Image</label>
                     </td>
+                    
                     <td>
+                         <img width="300" src="sliders/<?php echo $getsliderById['slider_image'] ?>" alt=""><br/>
                         <input type="file" name="slider_image"/>
                     </td>
+                </tr>
+                <tr>
+                    <td>Link</td>
+                    <td><input type="text" name="link" class="medium" value="<?php echo $getsliderById['link'] ?>"></td>
                 </tr>
 				<tr>
                     <td></td>

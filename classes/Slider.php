@@ -19,6 +19,7 @@ class Slider
 	public function insertSlider($data,$file)
 	{
 		$slidername = mysqli_real_escape_string($this->db->link,$data['sliderName']);
+		$link = mysqli_real_escape_string($this->db->link,$data['link']);
 		$type = mysqli_real_escape_string($this->db->link,$data['type']);
 		// kiểm tra hình ảnh và lấy hình ảnh cho vào folder uploads
 		$premited = array('jpg','jpeg','png','gif');
@@ -31,7 +32,7 @@ class Slider
 		$unique_image = substr(md5(time()), 0,10).'.'.$file_ext;
 		$uploaded_image = "./sliders/".$unique_image;
 
-		if (empty($slidername))
+		if (empty($slidername) || empty($link))
 		{
 			$alert="<span class='error'>Fiels must be not empty</span>";
 			return $alert;
@@ -72,7 +73,7 @@ class Slider
 	public function updateSlider($data,$files,$id)
 	{
 		$slidername = mysqli_real_escape_string($this->db->link,$data['sliderName']);
-
+		$link = mysqli_real_escape_string($this->db->link,$data['link']);
 		// kiểm tra hình ảnh và lấy hình ảnh cho vào folder uploads
 		$premited = array('jpg','jpeg','png','gif');
 		$file_name = $_FILES['slider_image']['name'];
@@ -84,7 +85,7 @@ class Slider
 		$unique_image = substr(md5(time()), 0,10).'.'.$file_ext;
 		$uploaded_image = "./sliders/".$unique_image;
 
-		if (empty($slidername))
+		if (empty($slidername) || empty($link))
 		{
 			$alert="<span class='error'>Fiels must be not empty</span>";
 			return $alert;
@@ -99,13 +100,13 @@ class Slider
 					return $alert;
 				}
 					move_uploaded_file($file_temp, $uploaded_image);
-					$query = "UPDATE tbl_slider SET sliderName = '$slidername',slider_image='$unique_image' WHERE sliderId = '$id'";
+					$query = "UPDATE tbl_slider SET sliderName = '$slidername',link='$link',slider_image='$unique_image' WHERE sliderId = '$id'";
 					
 			}
 			else
 			{
 				// nếu người dùng không chọn ảnh
-				$query = "UPDATE tbl_slider SET sliderName = '$slidername' WHERE sliderId = '$id'";
+				$query = "UPDATE tbl_slider SET sliderName = '$slidername',	link='$link' WHERE sliderId = '$id'";
 					
 			}
 			
