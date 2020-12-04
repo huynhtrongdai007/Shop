@@ -1,6 +1,19 @@
 ﻿<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
 
+<?php include'../classes/User.php'; ?>
+<?php 
+    
+    $changepassword = new User();
+ 
+   if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit']))
+    {
+        $oldpass = $_POST['oldpass'];
+        $newPass = $_POST['newPass'];
+        $action = $changepassword->changePassword($oldpass,$newPass);
+    }   
+
+ ?>
 <div class="grid_10">
     <div class="box round first grid">
         <h2>Change Password</h2>
@@ -21,11 +34,20 @@
                         <label>New Password</label>
                     </td>
                     <td>
-                        <input type="password" placeholder="Enter New Password..." name="newpass" class="medium" />
+                        <input type="password" placeholder="Enter New Password..." name="newPass" class="medium" />
                     </td>
                 </tr>
-				 
-				
+				   <tr>
+                    <td></td>
+                       <td>
+                    <?php 
+                        if (isset($action)) {
+                            echo $action;
+                        }
+                     ?>
+                
+                       </td>
+                   </tr>
 				 <tr>
                     <td>
                     </td>
