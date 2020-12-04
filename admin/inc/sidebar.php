@@ -54,6 +54,12 @@
                      
                     </ul>
                 </li>
+                    <li><a class="menuitem">User</a>
+                    <ul class="submenu">
+                        <li><a href="userlist.php">Danh Sách User</a> </li>
+                        <li><a href="adduser.php">Tạo User</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
