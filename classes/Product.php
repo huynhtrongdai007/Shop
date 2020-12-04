@@ -238,7 +238,7 @@ public function update_quantity_product($data,$files,$id){
 	public function getProductFeathered($trang)
 	{
 		$from = ($trang - 1) * 4;
-		$query = "SELECT * FROM tbl_product LIMIT $from,4";
+		$query = "SELECT * FROM tbl_product order by product_soldout DESC LIMIT $from,4";
 		$result = $this->db->select($query);
 		
 		return $result;
@@ -381,6 +381,42 @@ public function update_quantity_product($data,$files,$id){
 	}
 
 
+	// lấy sản phẩm mói nhất theo thương hiệu
+
+	public function getProductTP_Link() {
+		$query = "SELECT pr.productId,pr.productName,br.brandName,pr.image,pr.product_desc FROM tbl_product as pr join tbl_brand as br
+		on pr.brandId = br.brandId	
+		 where br.brandId = 14 order by pr.productId desc LIMIT 1";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+	public function getProduct_OEM() {
+		$query = "SELECT pr.productId,pr.productName,br.brandName,pr.image,pr.product_desc FROM  tbl_product 
+		as pr join tbl_brand as br
+		on pr.brandId = br.brandId	
+		where br.brandId = 13 order by pr.productId desc LIMIT 1";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+	public function getProduct_Viettel() {
+		$query = "SELECT pr.productId,pr.productName,br.brandName,pr.image,pr.product_desc FROM  tbl_product 
+		as pr join tbl_brand as br
+		on pr.brandId = br.brandId	
+		where br.brandId = 12 order by pr.productId desc LIMIT 1";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+	public function getProduct_Dell() {
+		$query = "SELECT pr.productId,pr.productName,br.brandName,pr.image,pr.product_desc FROM tbl_product 
+		as pr join tbl_brand as br
+		on pr.brandId = br.brandId	
+		 where br.brandId = 10 order by pr.productId desc LIMIT 1";
+		$result = $this->db->select($query);
+		return $result;
+	}
 
 
 }
