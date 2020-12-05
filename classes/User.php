@@ -35,6 +35,12 @@ class User
 		 return $result;
 	}
 
+	public function userProfile($username) {
+ 		 $query = "SELECT * FROM tbl_admin WHERE adminUser = '$username'";
+		 $result = $this->db->select($query);
+		 return $result;
+ 	}
+
 	public function insert($data) {
 		$name = mysqli_real_escape_string($this->db->link,$data['adminName']);
  		$email = mysqli_real_escape_string($this->db->link,$data['adminEmail']);
@@ -42,20 +48,16 @@ class User
  		$password = mysqli_real_escape_string($this->db->link,md5($data['adminPass']));
  		$level = mysqli_real_escape_string($this->db->link,$data['level']);
  		
- 		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  				$alert = "<span class='error'>Invalid email format</span>";
-  				return $alert;
-		}
-
-		if (!preg_match("/^[a-zA-Z-' ]*$/",$email)) {
-  			$alert = "<span class='error'>Only letters and white space allowed</span>";
-  			return $alert;
-		}
+ 	
 
  		if (empty($name) || empty($username) || empty($email) || empty($password)) {
  			$alert="<span class='error'>Fiels must be not empty</span>";
  			return $alert;
- 		}else if($this->checkName($username))
+ 		} else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  				$alert = "<span class='error'>Invalid email format</span>";
+  				return $alert;
+		}
+ 		else if($this->checkName($username))
 			{
 	 			$alert="<span class='error'>Name User was has please choose other name</span>";
 	 			return $alert;
@@ -143,6 +145,9 @@ class User
  		}
 		 
  	}
+
+
+
 
 
 }

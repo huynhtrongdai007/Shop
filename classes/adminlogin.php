@@ -4,6 +4,7 @@ include_once $filepath.'/../lib/session.php';
 Session::checkLogin();
 include_once ($filepath.'/../lib/database.php');
 include_once ($filepath.'/../helpers/format.php');
+
  class adminlogin
  {
  	private	$db;
@@ -29,7 +30,7 @@ include_once ($filepath.'/../helpers/format.php');
  		}
  		else
  		{
- 			$query = "SELECT adminName,adminPass FROM tbl_admin WHERE adminName = '$adminUser' AND adminPass = '$adminPass'";
+ 			$query = "SELECT adminUser,adminPass FROM tbl_admin WHERE adminUser = '$adminUser' AND adminPass = '$adminPass'";
  			$result = $this->db->select($query);
 
  			if($result != false)
@@ -37,7 +38,7 @@ include_once ($filepath.'/../helpers/format.php');
  				$value = $result->fetch_assoc();
  				Session::set('adminlogin',true);
  				Session::set('adminID',$value['adminId']);
- 				Session::set('adminUser',$value['adminName']);
+ 				Session::set('adminUser',$value['adminUser']);
  				Session::set('adminPass',$value['adminPass']);
  				header("location:index.php");
  				exit();
