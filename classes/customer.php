@@ -144,4 +144,10 @@ include_once ($filepath.'/../helpers/format.php');
  		return $result;
  	}
 
+ 	public function getCountries() {
+ 		$query = "SELECT CountryName,TwoCharCountryCode FROM tbl_countries";
+ 		$result = $this->db->select($query);
+ 		return $result;
+ 	} 
+
 }

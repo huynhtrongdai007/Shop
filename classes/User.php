@@ -39,41 +39,55 @@ class User
 		$name = mysqli_real_escape_string($this->db->link,$data['adminName']);
  		$email = mysqli_real_escape_string($this->db->link,$data['adminEmail']);
  		$username = mysqli_real_escape_string($this->db->link,$data['adminUser']);
- 		$password = mysqli_real_escape_string($this->db->link,$data['adminEmail']);
+ 		$password = mysqli_real_escape_string($this->db->link,md5($data['adminPass']));
  		$level = mysqli_real_escape_string($this->db->link,$data['level']);
-		
+ 		
+ 		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  				$alert = "<span class='error'>Invalid email format</span>";
+  				return $alert;
+		}
+
+		if (!preg_match("/^[a-zA-Z-' ]*$/",$email)) {
+  			$alert = "<span class='error'>Only letters and white space allowed</span>";
+  			return $alert;
+		}
+
  		if (empty($name) || empty($username) || empty($email) || empty($password)) {
  			$alert="<span class='error'>Fiels must be not empty</span>";
  			return $alert;
- 		}else {
- 		  $query = "INSERT INTO tbl_admin VALUES('$name','$email','$username','$password','$level')";
- 			$result = $this->db->insert($query);
- 			if ($result) {
- 				
-		 			$alert="<span class='success'>Inserted User successfully</span>";
-		 			return $alert;
- 			}else{
+ 		}else if($this->checkName($username))
+			{
+	 			$alert="<span class='error'>Name User was has please choose other name</span>";
+	 			return $alert;
+			}
+ 			else {
+	 		  $query = "INSERT INTO tbl_admin (adminName,adminEmail,adminUser,adminPass,level) VALUES('$name','$email','$username','$password','$level')";
+	 			$result = $this->db->insert($query);
+	 			if ($result) {
+	 				
+			 			$alert="<span class='success'>Inserted User successfully</span>";
+			 			return $alert;
+	 			}else{
 
-		 			$alert="<span class='success'>Insert user not success</span>";
-		 			return $alert;
+			 			$alert="<span class='success'>Insert user not success</span>";
+			 			return $alert;
+	 			}
  			}
- 		}
 
 	}
 
 
-	public function updateData() {
+	public function updateData($data,$id) {
 		$name = mysqli_real_escape_string($this->db->link,$data['adminName']);
- 		$email = mysqli_real_escape_string($this->db->link,$data['adminEmail']);
  		$username = mysqli_real_escape_string($this->db->link,$data['adminUser']);
- 		$password = mysqli_real_escape_string($this->db->link,$data['adminEmail']);
  		$level = mysqli_real_escape_string($this->db->link,$data['level']);
 		
- 		if (empty($name) || empty($username) || empty($email) || empty($password)) {
+ 		if (empty($name) || empty($username) || empty($level)) {
  			$alert="<span class='error'>Fiels must be not empty</span>";
  			return $alert;
  		}else {
- 		  $query = "UPDATE tbl_admin SET adminName = '$name',email = '$email',adminUser ='$username',adminPass = '$password', level = '$level')";
+ 		  $query = "UPDATE tbl_admin SET adminName = '$name',adminUser ='$username', level = '$level'
+ 		   where adminId = '$id'";
  			$result = $this->db->insert($query);
  			if ($result) {
  				
@@ -92,6 +106,15 @@ class User
 		 $result = $this->db->delete($query);
 		 return $result;
 	}
+
+
+	// kiem tra ten co trong db chua
+ 	public function checkName($adminUser)
+ 	{
+ 		$query = "SELECT adminUser FROM tbl_admin WHERE adminUser = '$adminUser'";
+ 		$result = $this->db->select($query);
+ 		return $result;
+ 	}
 
 	public function changePassword($oldPass,$newPass) {
 

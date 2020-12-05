@@ -6,9 +6,11 @@
     $id = $_GET['id'];
     $getbyid = $user->getById($id);
     $item =  $getbyid->fetch_assoc();
+
+
     if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit']))
     {
-        
+         $updateUser = $user->updateData($_POST,$id);
     }   
 
 
@@ -28,7 +30,7 @@
                         <label>Tên</label>
                     </td>
                     <td>
-                        <input type="text" name="" value="<?php echo $item['adminName'] ?>" placeholder="Enter Name..." class="medium" />
+                        <input type="text" name="adminName" value="<?php echo $item['adminName'] ?>" placeholder="Enter Name..." class="medium" />
                     </td>
                 </tr>           
     
@@ -37,7 +39,7 @@
                         <label>Username</label>
                     </td>
                     <td>
-                       <input type="text" name="" value="<?php echo $item['adminUser'] ?>" placeholder="Enter Username..." class="medium" />
+                       <input type="text" name="adminUser" value="<?php echo $item['adminUser'] ?>" placeholder="Enter Username..." class="medium" />
                     </td>
                 </tr>
                 
@@ -46,21 +48,32 @@
                         <label>Email</label>
                     </td>
                     <td>
-                       <input type="text" name="" value="<?php echo $item['adminEmail'] ?>" placeholder="Enter Email..." class="medium" />
+                       <input type="email" disabled   value="<?php echo $item['adminEmail'] ?>" placeholder="Enter Email..." class="medium" />
                     </td>
                 </tr>
                 <tr>
                     <td><label>Level</label></td>
                     <td>
                         <select name="level">
-                            <?php if($item['level']==0):?>
-                            <option selected value="0">Người Thường</option>
-                            <option value="1">Admin</option>
-                            <?php else: ?>   
-                            <option selected  value="1">Admin</option>   
-                            <option selected value="0">Người Thường</option>
-                            <?php endif; ?>
+                            <?php if($item['level']==1) {?>
+                            <option  value="2">Người Thường</option>
+                            <option selected value="1">Admin</option>
+                            <?php }else { ?>   
+                            <option  value="2">Người Thường</option>
+                            <option selected value="1">Admin</option>
+                            <?php } ?>
                         </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <?php 
+                           if (isset($updateUser)) {
+                               echo $updateUser;
+                           }
+
+                         ?>
                     </td>
                 </tr>
 				<tr>

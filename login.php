@@ -62,8 +62,12 @@
 						</div>
 		    		<div>
 						<select id="country" name="country" class="frm-field required">
-							<option value="null">Select a Country</option>         
-							<option value="AF">Afghanistan</option>
+							<option value="null">Select a Country</option> 
+							<?php $getCountries =  $cus->getCountries(); ?>    
+							   <?php foreach ($getCountries as $item): ?>
+							    	<option value="<?php echo $item['TwoCharCountryCode'] ?>"><?php echo $item['CountryName']; ?></option>
+							    <?php endforeach ?>    
+							
 							
 
 		       		  </select>
