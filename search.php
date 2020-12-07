@@ -3,6 +3,7 @@
 	if ($_SERVER['REQUEST_METHOD']=='GET') {
 		$keywords = $_GET['search'];
 		$result_search = $pr->searchProduct($keywords);
+		
 	}  
 	if($_GET['search']==NULL){
 		header("location:index.php");
@@ -20,18 +21,19 @@
     		<div class="clear"></div>
     	</div>
 	      <div class="section group">
-
+	  		<?php 
+	  			if (is_array($result_search) || is_object($result_search)) {
+	  		 ?>
 	      	<?php foreach ($result_search as $items): ?>
-			  <?php if(!isset($items)){echo "Not product";}else{ ?>
-				<div class="grid_1_of_4 images_1_of_4">
-					 <a href="preview.php?id=<?php echo $items['product_id']; ?>"><img src="admin/uploads/<?php echo $items['image'] ?>" alt="" /></a>
-					 <h2><?php echo $items['product_name']; ?></h2>
-					 <p><?php echo $fm->textShorten($items['description'],50); ?></p>
+			
+			      <div class="grid_1_of_4 images_1_of_4">
+					 <a href="preview.php?id=<?php echo $items['productId']; ?>"><img src="admin/uploads/<?php echo $items['image'] ?>" alt="" /></a>
+					 <h2><?php echo $items['productName']; ?></h2>
+					 <p><?php echo $fm->textShorten($items['product_desc'],50); ?></p>
 					 <p><span class="price"><?php echo number_format($items['price']).' '.'VNĐ'; ?></span></p>
-				     <div class="button"><span><a href="preview.php?id=<?php echo $items['product_id']; ?>" class="details">Details</a></span></div>
+				     <div class="button"><span><a href="preview.php?id=<?php echo $items['productId']; ?>" class="details">Details</a></span></div>
 				</div>
-			<?php } endforeach; ?>
-				
+			<?php  endforeach; }else{echo "khong co ket qua tim kiem";} ?>
 
 			</div>
 

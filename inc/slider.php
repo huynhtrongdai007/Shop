@@ -17,7 +17,7 @@
 			<div class="section group">
 				<div class="listview_1_of_2 images_1_of_2">
 					<div class="listimg listimg_2_of_1">
-						 <a href="preview.html"> <img src="admin/uploads/<?php echo $item1['image'] ?> " alt="" /></a>
+						 <a href="preview.php?id=<?php echo $item1['productId'] ?>"> <img src="admin/uploads/<?php echo $item1['image'] ?> " alt="" /></a>
 					</div>
 				    <div class="text list_2_of_1">
 						<h2><?php echo  $item1['brandName']; ?> </h2>
@@ -28,7 +28,7 @@
 			   </div>			
 					<div class="listview_1_of_2 images_1_of_2">
 					<div class="listimg listimg_2_of_1">
-						 <a href="preview.html"> <img src="admin/uploads/<?php echo $item2['image'] ?>" alt="" /></a>
+						 <a href="preview.php?id=<?php echo $item2['productId'] ?>"> <img src="admin/uploads/<?php echo $item2['image'] ?>" alt="" /></a>
 					</div>
 				    <div class="text list_2_of_1">
 						<h2><?php echo $item2['brandName']; ?></h2>
@@ -42,7 +42,7 @@
 			<div class="section group">
 				<div class="listview_1_of_2 images_1_of_2">
 					<div class="listimg listimg_2_of_1">
-						 <a href="preview.html"> <img src="admin/uploads/<?php echo $item3['image'] ?>" alt="" /></a>
+						 <a href="preview.php?id=<?php echo $item3['productId'] ?>"> <img src="admin/uploads/<?php echo $item3['image'] ?>" alt="" /></a>
 					</div>
 				    <div class="text list_2_of_1">
 						<h2><?php echo $item3['brandName']; ?></h2>
@@ -53,7 +53,7 @@
 			   </div>	
 			   <div class="listview_1_of_2 images_1_of_2">
 					<div class="listimg listimg_2_of_1">
-						 <a href="preview.html"> <img src="admin/uploads/<?php echo $item4['image'] ?>" alt="" /></a>
+						 <a href="preview.php?id=<?php echo $item4['productId'] ?>"><img src="admin/uploads/<?php echo $item4['image'] ?>" alt=""/></a>
 					</div>
 				    <div class="text list_2_of_1">
 						<h2><?php echo $item4['brandName']; ?></h2>

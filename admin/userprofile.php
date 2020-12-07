@@ -42,12 +42,8 @@
                 </tr>
                 <tr>
                     <td><label>Password</label></td>
-                    <?php 
-                            $enc = base64_decode('c4ca4238a0b923820dcc509a6f75849b');
-                            echo $enc;
-                        
-                     ?>
-                    <td><input type="password" id="password" value="<?php echo $enc; ?>" disabled class="medium" />
+        
+                    <td><input type="password" id="password" value="<?php echo $getUser['adminPass'] ?>" disabled class="medium" />
 
                     </td>
 

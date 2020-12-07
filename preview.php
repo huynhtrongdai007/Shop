@@ -146,7 +146,7 @@
 					<ul>
 						<?php $categoryName= $cat->fetchAll(); ?>
 						<?php foreach ($categoryName as $items): ?>
-				          <li><a href="productbycat.php?id=<?php echo $items['cateId']; ?>"><?php echo $items['catName']; ?></a></li>
+				          <li><a href="productbycat.php?id=<?php echo $items['catId']; ?>"><?php echo $items['catName']; ?></a></li>
 				        <?php endforeach; ?>
 				      
     				</ul>

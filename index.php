@@ -25,9 +25,9 @@
 
 	      	<?php foreach ($getProductFeathered as $items):?>
 				<div class="grid_1_of_4 images_1_of_4">
-					 <a href="preview.php"><img src="./admin/uploads/<?php echo $items['image']; ?>" alt="image" /></a>
+					 <a href="preview.php?id=<?php echo $items['productId'] ?>"><img src="./admin/uploads/<?php echo $items['image']; ?>" alt="image" /></a>
 					 <h2><?php echo $items['productName']; ?></h2>
-					 <p><?php echo $fm->textShorten($items['product_desc'],30); ?></p>
+					 <p><?php echo $fm->shorter($items['product_desc'],30); ?></p>
 					 <p><span class="price"><?php echo number_format($items['price'])."VNĐ"; ?></span></p>
 				     <div class="button"><span><a href="preview.php?id=<?php echo $items['productId']; ?>" class="details">Details</a></span></div>
 				</div>
@@ -49,10 +49,10 @@
 				<?php $getProductNew = $pr->getProductNew(); ?>
 				<?php foreach ($getProductNew as $items):?>
 				<div class="grid_1_of_4 images_1_of_4">
-					 <a href="preview.html"><img src="./admin/uploads/<?php echo $items['image'];?>" alt="" /></a>
+					 <a href="preview.php?id=<?php echo $items['productId'] ?>"><img src="./admin/uploads/<?php echo $items['image'];?>" alt="" /></a>
 					 <h2><?php echo $items['productName']; ?></h2>
 					 <p><span class="price"><?php echo number_format($items['price']); ?></span></p>
-				     <div class="button"><span><a href="preview.php?id=<?php echo $items['product_id'];?>" class="details">Details</a></span></div>
+				     <div class="button"><span><a href="preview.php?id=<?php echo $items['productId'];?>" class="details">Details</a></span></div>
 				</div>
 			<?php endforeach; ?>
 			</div>

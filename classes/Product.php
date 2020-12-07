@@ -360,14 +360,10 @@ public function update_quantity_product($data,$files,$id){
 	{
 		$keywords = mysqli_real_escape_string($this->db->link,$keywords);
 		$keywords = $this->fm->validation($keywords);
-		$query = "SELECT * FROM tbl_product WHERE product_name LIKE '%$keywords%'";
+		$query = "SELECT * FROM tbl_product WHERE productName LIKE '%$keywords%'";
 		$result = $this->db->select($query);
-		if(empty($result)){
-			$alert="khong co ket qua tim kiem";
-			return $alert;
-		}else {
-			return $result;
-		}
+		return $result;
+		
 	}
 
 	public function countPage()

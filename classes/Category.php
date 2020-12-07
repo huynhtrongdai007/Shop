@@ -98,8 +98,11 @@ class Category
 
 	public function fetchProductByCat($id)
 	{
-		$query = "SELECT *  FROM tbl_product WHERE catId = '$id' ORDER BY catId DESC";
+		$query = "SELECT *  FROM tbl_product as pro join tbl_category as cat 
+		on pro.catId = cat.catID
+		 WHERE cat.catId = '$id' ORDER BY cat.catId DESC";
 		$result = $this->db->delete($query);
+	
 		return $result;
 	}
 }
