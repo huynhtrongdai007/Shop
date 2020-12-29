@@ -5,7 +5,7 @@
 	} else {
 		$id = $_GET['id'];
 	}
-
+	
 	$productByCat = $cat->fetchProductByCat($id);	
 	$nameCat = $productByCat->fetch_assoc();
  ?>

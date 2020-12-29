@@ -415,4 +415,38 @@ public function update_quantity_product($data,$files,$id){
 	}
 
 
+	// lấy sản phẩm mói nhất theo top brand
+	public function getTopBrandProductTP_Link() {
+		$query = "SELECT pr.productId,pr.productName,br.brandName,pr.image,pr.product_desc FROM tbl_product as pr join tbl_brand as br
+		on pr.brandId = br.brandId	
+		 where br.brandId = 14 order by pr.productId desc LIMIT 4";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+	public function getTopBrandProduct_SAMSUM() {
+		$query = "SELECT pr.productId,pr.productName,br.brandName,pr.image,pr.product_desc FROM  tbl_product 
+		as pr join tbl_brand as br
+		on pr.brandId = br.brandId	
+		where br.brandId = 6 order by pr.productId desc LIMIT 4";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+	public function getTopBrandProduct_Apple() {
+		$query = "SELECT pr.productId,pr.productName,br.brandName,pr.image,pr.product_desc FROM  tbl_product 
+		as pr join tbl_brand as br
+		on pr.brandId = br.brandId	
+		where br.brandId = 7 order by pr.productId desc LIMIT 4";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+
+	public function getProductByCategory() {
+		$query = "SELECT * FROM tbl_product AS PRO JOIN tbl_category AS cat 
+				on pro.catId = cat.catId ORDER by pro.productId DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
 }
